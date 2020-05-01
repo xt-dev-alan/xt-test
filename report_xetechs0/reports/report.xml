@@ -20,5 +20,16 @@
             name="report_xetechs0.report_saleorder_xetechs_total"
             print_report_name="(object.state in ('draft', 'sent') and 'Quotation Xetechs - %s' % (object.name)) or 'Order - %s' % (object.name)"
         />
+
+        <report
+            id="action_report_xetechs_total xmp"
+            string="Quotation [XETECHS EJEMPLO]"
+            model="sale.order"
+            report_type="qweb-pdf"
+            file="report_xetechs0.report_saleorder_xetechs_total"
+            name="report_xetechs0.report_saleorder_xetechs_total"
+            print_report_name="(object.state in ('draft', 'sent') and 'Quotation Xetechs - %s' % (object.name)) or 'Order - %s' % (object.name)"
+        />
+
     </data>
 </odoo>
