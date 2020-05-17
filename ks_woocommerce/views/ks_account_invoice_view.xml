@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--Inherited Form View for WooCommerce Order Payment-->
+    <record id="ks_woo_account_payment_form_view" model="ir.ui.view">
+        <field name="name">ks.woo.account.payment.inherit.form.view</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_transaction_id']" position="after">
+                <field name="ks_woo_sale_order_id" invisible="1"/>
+                <field name="ks_woo_payment_id" groups="ks_woocommerce.ks_woocommerce_group"
+                       attrs="{'invisible': [('ks_woo_sale_order_id', '=', False)]}"/>
+                <field name="ks_woo_instance_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_transaction_id']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('ks_woo_sale_order_id', '=', False), ('payment_method_code', '!=', 'electronic')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Inherited Form View for WooCommerce Order Payment_Invoices-->
+    <record id="ks_woo_account_payment_invoice_form_view" model="ir.ui.view">
+        <field name="name">ks.woo.account.payment.invoice.inherit.form.view</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="ks_woo_sale_order_id" invisible="1"/>
+                <field name="ks_woo_payment_id" groups="ks_woocommerce.ks_woocommerce_group"
+                       attrs="{'invisible': [('ks_woo_sale_order_id', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_transaction_id']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('ks_woo_sale_order_id', '=', False), ('payment_method_code', '!=', 'electronic')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Inherited Form View for WooCommerce Order Invoices-->
+     <record id="ks_woo_account_invoices_form_view" model="ir.ui.view">
+        <field name="name">ks.woo.account.invoice.inherit.form.view</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_origin']" position="before">
+                <field name="ks_woo_order_id" options="{'no_open': True}"
+                       groups="ks_woocommerce.ks_woocommerce_group"
+                       attrs="{'invisible': [('ks_woo_order_id', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_origin']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('ks_woo_order_id', '!=', False), ('invoice_origin', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

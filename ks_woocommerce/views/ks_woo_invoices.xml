@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--    &lt;!&ndash; Tree view for WooCommerce Invoices&ndash;&gt;-->
+<!--    <record id="ks_tree_woocommerce_invoices" model="ir.ui.view">-->
+<!--        <field name="name">ks.woo.account.invoice.tree.view</field>-->
+<!--        <field name="model">account.invoice</field>-->
+<!--        <field name="mode">primary</field>-->
+<!--        <field name="inherit_id" ref="account.invoice_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//tree" position="attributes">-->
+<!--                <attribute name="create">0</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!--Window Action for WooCommerce Invoices-->
+    <record model="ir.actions.act_window" id="action_woocommerce_invoices">
+        <field name="name">WooCommerce Invoices</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('ks_woo_order_id', '!=', False)]</field>
+<!--        <field name="view_id" ref="ks_woocommerce.ks_tree_woocommerce_invoices"/>-->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                **All the WooCommerce Order Invoices will appear here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_ks_woocomerce_invoices"
+              name="Invoices"
+              parent="menu_ks_woocomerce_order"
+              sequence="2"
+              action="action_woocommerce_invoices"
+              groups="ks_woocommerce.ks_woocommerce_group"
+    />
+   </odoo>

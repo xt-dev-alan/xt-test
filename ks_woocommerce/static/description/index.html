@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Odoo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+</head>
+<!-- odoo description page css -->
+<style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+        font-weight: 400;
+        line-height: 1.1;
+        color: #21272b;
+    }
+    
+    ul {
+        color: #222020;
+    }
+
+    .oe_styling_v8 a.btn {
+        color: white;
+    }
+
+    :root {
+       --primary: #00A09D;
+    }
+</style>
+
+<body data-spy="scroll" data-target="#navbar-example">
+<div class="container pr-5 pr-sm-0 pr-md-0 pr-lg-0">
+    <!-- Floating Menu -->
+    <div class="for_open" data-toggle="collapse" href="#floating_div_red" role="button" aria-expanded="true"
+    aria-controls="floating_div_red" style="width: 50px;
+    height: 50px;
+    background: #e32235;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 100;
+    font-size: 20px;
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    z-index: 1000;
+    box-shadow: 1px 2px 11px rgba(0, 0, 0, 0.3), -5px 7px 12px rgba(0, 0, 0, 0.22);
+    cursor: pointer;background-image: radial-gradient( circle farthest-corner at 10% 20%, rgb(235, 36, 39) 0%, rgb(200, 33, 40) 100.4% );">
+    <i class="fa fa-bars" ></i>
+</div>
+<div class="collapse show" id="floating_div_red" style="position: fixed;
+bottom: 20px;
+left: 20px;
+z-index: 1001;">
+    <div class="for_close" data-toggle="collapse" href="#floating_div_red" role="button" aria-expanded="true"
+        aria-controls="floating_div_red" style="width: 25px;
+        height: 25px;
+        background: #e32235;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 100;
+        margin-left: auto;
+        font-size: 12px;
+        margin-bottom: -24px;position: relative;
+        z-index: 1000;
+        cursor: pointer;background-image: radial-gradient( circle farthest-corner at 10% 20%, rgb(235, 36, 39) 0%, rgb(200, 33, 40) 100.4% );">
+        <i class="fa fa-times" ></i>
+    </div>
+    <div class="ks_box_outer" >
+        <div class="ks_logo">
+            <img src="images/floating-menu/bg-float.svg" style="width: calc(100% + 1px);" alt="">
+        </div>
+        <div class="ks_box_items" style="    margin-top: -32px;
+        background: #eb2427;
+        border-radius: 0 0 10px 10px;
+        padding-bottom: 10px;
+        position: relative;
+        ">
+            <div class="ks_box_items_inner d-flex justify-content-center" style="padding: 10px;">
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScQgnFhKSn2arwIFin5T0TIwZk5bEKA313HyAgg66sFPV5A9A/viewform" target="_blank" style="text-decoration: none;font-size: 14px;margin-right: 15px;" class="d-flex flex-column align-items-center text-white font-weight-light">
+                    <img src="images/floating-menu/Film.gif" style="width: 40px;" alt="">
+                    <span class="pt-2 font-weight-bold">Request Demo</span>
+                </a>
+                <a href="https://apps.odoo.com/apps/modules/browse?search=ksolves" target="_blank" style="text-decoration: none;font-size: 14px;margin-right: 18px;" class="d-flex flex-column align-items-center text-white font-weight-light">
+                    <img src="images/floating-menu/Files.gif" style="height: 60px;margin-top: -20px;" alt="">
+                    <span class="pt-2 font-weight-bold">All Apps</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Floating Menu Ends -->
+    <!-- Header -->
+    <div class="row justify-content-md-between justify-content-center border-bottom align-items-center py-2 mx-0 flex-column flex-sm-column flex-md-row flex-lg-row">
+        <div class="text-center mr-lg-5 mb-3 mb-lg-0">
+            <a class="btn p-0" href="https://ksolves.com/">
+                <img src="https://apps.odoo.com/apps/modules/12.0/ks_dashboard_ninja/images/ksolves-logo.png" alt="ksolves-logo">
+            </a>
+        </div>
+        <div class="mt-md-0 mt-4 mb-3 mb-lg-0">
+            <a href="#" class="btn-outline-primary btn-sm mb-2 mb-lg-0 pr-3" style="font-size: 13px;position: relative;overflow: hidden;padding: 10px 4px;line-height: 0px;border-radius: 0;border: 1px solid var(--primary);transition: 0.2s ease-in-out;"><i class="fa fa-check"></i> Community</a>
+            <a href="#" class="btn-outline-primary btn-sm mb-2 mb-lg-0 pr-3" style="font-size: 13px;position: relative;overflow: hidden;padding: 10px 4px;line-height: 0px;border-radius: 0;border: 1px solid var(--primary);transition: 0.2s ease-in-out;"><i class="fa fa-check"></i> Enterprise</a>
+        </div>
+        <div class="mb-2 mb-lg-0 text-center text-sm-left mt-3 mt-sm-3 mt-md-0 mt-lg-0">
+            <a href="https://www.facebook.com/Ksolves.India" class="btn btn-sm px-0" style="border: none; font-size: 10px; width: 30px;color: #3b5999;"> <i class="fa fa-facebook fa-2x"></i> </a>
+            <a href="https://www.linkedin.com/company/ksolves" class="btn btn-sm px-0" style="font-size: 10px;border: none; width: 30px;color:#0077B5;"> <i class="fa fa-linkedin fa-2x"></i> </a>
+            <a href="https://www.youtube.com/channel/UCplv9V47g9VidekGN6Wp1ew" class="btn btn-sm px-0" style="font-size: 10px;border: none; width: 30px;color: #c4302b;"> <i class="fa fa-youtube-play fa-2x"></i> </a>
+            <a href="https://twitter.com/ksolves_india" class="btn btn-sm px-0" style="font-size: 10px;border: none; width: 30px;color: #00acee;"> <i class="fa fa-twitter fa-2x"></i> </a>
+        </div>
+    </div>
+    <div class="suggested-app" style="clear:both; width: 100%; float: left;">
+        <div class="">
+            <div class="w-100">
+                <div id="navbar-example" style="position: fixed;bottom: 100px;right: 0;z-index: 10000;">
+                    <ul class="nav nav-tabs mb-4" role="tablist" style="background: transparent;display: inline-block; border-bottom: 0px;position: sticky;right: 0;top: 0;padding-top: 20px; width: 60px;">
+                    <!-- Nav tabs -->
+                        <li class="nav-item" title="DESCRIPTION" style="border-radius:0;margin: 0 10px 3px 10px; background:#f1f1f1;">
+                            <a class="nav-link active" style="border-radius: 0;transition: 0.3s ease-in-out;border-color:#fdc6a3;color: #000;font-family: Roboto;font-weight: 500;padding:.5rem;text-align: center;"  href="#description"><img src="images/description-icon.svg" alt="" style="width: 100%;max-width: 25px; margin: 0 auto;"></a>
+                        </li>
+                        <li class="nav-item" style="border-radius:0;margin: 0 10px 3px 10px; background:#f1f1f1;">
+                            <a class="nav-link" title="WORKFLOW" style="border-radius: 0;transition: 0.3s ease-in-out;border-color:#fdc6a3;color: #000;font-family: Roboto;font-weight: 500;padding:.5rem;text-align: center;" href="#workflow"><img src="images/WorkFlow-icon.svg" alt="" style="width: 100%;max-width: 25px; margin: 0 auto;"></a>
+                        </li>
+                        <li class="nav-item" style="border-radius:0;margin: 0 10px 3px 10px; background:#f1f1f1;">
+                            <a class="nav-link" title="FEATURES" style="border-radius: 0;transition: 0.3s ease-in-out;border-color:#fdc6a3;color: #000;font-family: Roboto;font-weight: 500;padding:.5rem;text-align: center;" href="#pills-home"><img src="images/Hot-Features-icon.svg" alt="" style="width: 100%;max-width: 25px; margin: 0 auto;"></a>
+                        </li>
+                        <li class="nav-item" title="SCREENSHOTS" style="border-radius:0;margin: 0 10px 3px 10px; background:#f1f1f1;">
+                            <a class="nav-link " style="border-radius: 0;transition: 0.3s ease-in-out;border-color:#fdc6a3;color: #000;font-family: Roboto;font-weight: 500;padding:.5rem;text-align: center;" href="#screenshots"><img src="images/Screenshot-icon.svg" alt="" style="width: 100%;max-width: 25px; margin: 0 auto;"></a>
+                        </li>
+                        <li class="nav-item" title="SETUP" style="border-radius:0;margin: 0 10px 3px 10px; background:#f1f1f1;">
+                            <a class="nav-link " style="border-radius: 0;transition: 0.3s ease-in-out;border-color:#fdc6a3;color: #000;font-family: Roboto;font-weight: 500;padding:.5rem;text-align: center;"  href="#pills-set_up"><img src="images/Setup-icon.svg" alt="" style="width: 100%;max-width: 25px; margin: 0 auto;"></a>
+                        </li>
+                        <li class="nav-item" title="RELEASES" style="border-radius:0;margin: 0 10px 3px 10px; background:#f1f1f1;">
+                            <a class="nav-link" style="border-radius: 0;transition: 0.3s ease-in-out;border-color:#fdc6a3;color: #000;font-family: Roboto;font-weight: 500;padding:.5rem;text-align: center;"  href="#pills-releases"><img src="images/release.png" alt="" style="width: 100%; max-width: 25px; margin: 0 auto;"></a>
+                        </li>
+                         <li class="nav-item" title="COMMON" style="border-radius:0;margin: 0 10px 3px 10px; background:#f1f1f1;">
+                            <a class="nav-link" style="border-radius: 0;transition: 0.3s ease-in-out;border-color:#fdc6a3;color: #000;font-family: Roboto;font-weight: 500;padding:.5rem;text-align: center;"  href="#pills-common-mistakes"><img src="images/keep-in-mind-image.png" alt="" style="width: 100%; max-width: 25px; margin: 0 auto;"></a>
+                        </li>
+                        <li class="nav-item" title="FAQs" style="border-radius:0;margin: 0 10px 3px 10px; background:#f1f1f1;">
+                            <a class="nav-link" style="border-radius: 0;transition: 0.3s ease-in-out;border-color:#fdc6a3;color: #000;font-family: Roboto;font-weight: 500;padding:.5rem;text-align: center;"  href="#pills-faqs"><img src="images/FAQ.svg" alt="" style="width: 100%; max-width: 25px; margin: 0 auto;"></a>
+                        </li>
+                    </ul>
+                </div>
+                    <div id="description" class="align-items-center py-4 pt-5 row mt-3 no-gutters" style="background: rgba(245, 245, 245, 0.61);padding: 0 25px 15px;">
+                        <h1 class="heading-title display-4 col-12 col-sm-12 col-md-12 col-lg-4" style="word-break: break-word;font-size: 2.5rem;line-height: normal;font-weight: 100">Odoo WooCommerce Connector</h1>
+                        <p  class="col-12 col-sm-12 col-md-12 col-lg-8 px-sm-4 p-2 pt-4" style="font-size: 16px;border-width: 3px;border-style: solid;border: 0;font-family:Roboto;color: #4b4b4b;border-left: solid 1px #c31728;text-align: justify ">
+                            <b style="color: #c31728;">WooCommerce</b> is a flexible, open-source eCommerce plugin on Wordpress which provides a
+                            customizable platform for building your online business. If your backend operations are getting
+                            managed by Odoo and you have a WooCommerce store, then <b style="color: #c31728;">Odoo WooCommerce Integration</b> becomes a
+                            must for you.<br>
+                            <br>With Ksolves <b style="color: #c31728;"> Odoo WooCommerce connector</b> facilitates you complete Open source ERP software "Odoo" with renowned eCommerce
+                            trading Business "WooCommerce". It lets you integrate and manage your <i><b>WooCommerce stores</b></i> in Odoo and
+                            thus resolves the need to go in Woocommerce backend to handle things which can be managed from Odoo.This app provides <b style="color: #c31728;">bi-directional synchronization</b> of data from your
+                            WooCommerce website into Odoo and vice-versa. </p>
+                    </div>
+                    <div id="workflow" style="padding: 0 25px 15px;">
+                        <div class="text-left py-4 pt-5">
+                            <h2 class="mb-3 display-4 text-center" style="font-size: 2.6rem; font-weight: 600">
+                                    <span style="color: #e32235;">Work</span>Flow</h2>
+                                    <div class="row mb-4">
+                                            <div class="col-12 col-sm-6">
+                                                <img alt="bidirectional-sync"  src="images/bidirectional-sync.jpg"
+                                                                   style="max-width:100%;">
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <img alt="order-management"  src="images/order-management.jpg"
+                                                                   style="max-width:100%;">
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <img alt="auto-jobs"  src="images/auto-jobs.jpg"
+                                                                   style="max-width:100%;">
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <img alt="webhook"  src="images/webhook.jpg"
+                                                                   style="max-width:100%;">
+                                            </div>
+                                        </div>
+                        </div>
+                    </div>
+                    <div id="pills-home" style="background: rgba(245, 245, 245, 0.61);padding: 0 25px 15px;">
+                            <div class="text-left py-4 pt-5">
+                                <h2 class="mb-3 display-4 text-center" style="font-size: 2.6rem; font-weight: 600">
+                                    <span style="color: #e32235;">Key</span> Features</h2>
+                            </div>
+                            <div class="mb-4">
+                                <div class="row no-gutters">
+                                    <div class="col-12 col-lg-6">
+                                        <b style="font-size: 18px;text-decoration: underline;color: #21272b;">Sync Features :</b>
+                                        <ul class="pl-0 pl-sm-0 pl-md-5 pl-lg-5" style="font-size:16px;color: #4f4f4f;">
+                                            <li class="mb-3 mt-2">
+                                                <span>Creating and updating product, coupon, customer and order from WooCommerce to Odoo using <b>WEBHOOK</b> in <b>Real time</b></span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>Creating and updating product, coupon, customer and order from WooCommerce to Odoo using <b>WEBHOOK</b> in <b>Real time</b></span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>2-way sync of <b>Customer</b></span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>2-way sync of Product attributes along with its values</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>2-way sync of Product along with its variants, display image and gallery images</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>Import Sale Order from WooCommerce to Odoo </span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>Export the default sale order</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span><b>Auto product syncing</b> from WooCommerce to Odoo</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>2-way sync of Product categories, Tags and Coupons</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>Auto product <b>stock update</b> from Odoo to WooCommerce</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>Stock update for products on WooCommerce from odoo</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <b style="font-size: 18px;text-decoration: underline;color: #21272b;">Functional Features :</b>
+                                        <ul class="pl-0 pl-sm-0 pl-md-5 pl-lg-5" style="font-size:16px;color: #4f4f4f;">
+                                            <li class="mb-3 mt-2">
+                                                <span>Sale order <b>cancellation</b> in WooCommerce from Odoo end </span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>Update <b>sale order status</b> from Odoo to WooCommmerce </span>
+                                            </li>
+
+                                            <li class="mb-3">
+                                                <span><b>Auto sales order import</b> from WooCommerce to/ Support Odoo</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span><b>Auto sales order status</b> update</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span><b>Publish</b> or <b>Unpublish</b> Products to WooCommerce Store from Odoo in <b>Real time</b></span>
+                                            </li>
+                                                <li class="mb-3">
+                                                <span>Ability to select which way to sync i.e. from WooCommerce to Odoo or vice versa and then a <b>single click import/export</b> of all the data both ways</span>
+                                            </li>
+                                        </ul>
+                                        <b style="font-size: 18px;text-decoration: underline;color: #21272b;">Business Features:</b>
+                                        <ul class="pl-0 pl-sm-0 pl-md-5 pl-lg-5" style="font-size:16px;color: #4f4f4f;">
+                                            <li class="mb-3 mt-2">
+                                                <span>Integrate <b>multiple</b> WooCommerce <b>stores</b> with a single Odoo database</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span>Set <b>automatic jobs</b> using <b>crons</b> to update data in Odoo from WooCommerce periodically</span>
+                                            </li>
+
+                                            <li class="mb-3">
+                                                <span>Detailed <b>WooCommerce logs</b> available for syncing operations done along with the filtering feature</span>
+                                            </li>
+                                            <li class="mb-3">
+                                                <span><b>Search functionality</b> of WooCommerce data in Odoo for all the modules using module specific keywords</span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="screenshots">
+                                <div class="text-left py-4 pt-5">
+                                    <h2 class="mb-3 display-4 text-center" style="font-size: 2.6rem; font-weight: 600">
+                                        <span style="color: #e32235;">See</span> Screenshots</h2>
+                                </div>
+                                <div>
+                                    <ul class="list-unstyled pl-0 row bg-white" style="font-size:15px;">
+                                        <li class="col-sm-6 col-lg-3 mb-3 align-items-baseline font-weight-bold"
+                                            style="border-radius: 10px;font-size: 16px;">
+                                            <div data-toggle="modal" data-target="#features"style="overflow:hidden; background: #fff;box-shadow: 0 10px 29px 0 rgba(68,88,144,.1);text-align: center;
+        border:solid 1px #ddd; padding:5px; height:100%;">
+                                            <img alt="webhook"  src="preview_images/img/webhook.jpg"
+                                                 style="max-width:100%;">
+                                            <h2 class="my-3" style="font-family: Montserrat;line-height: normal; margin:0 0 20px; text-align: center;font-weight: 700;font-size: 12px;padding: 0 10px;">
+                                                WEBHOOK
+                                            </h2>
+                                        </div>
+                                        </li>
+                                        <li class="col-sm-6 col-lg-3 mb-3 align-items-baseline font-weight-bold"
+                                            style="border-radius: 10px;font-size: 16px;">
+                                            <div data-toggle="modal" data-target="#features"style="overflow:hidden; background: #fff;box-shadow: 0 10px 29px 0 rgba(68,88,144,.1);text-align: center;
+        border:solid 1px #ddd; padding:5px; height:100%;">
+                                                <img alt="Import-Customer"  src="preview_images/img/Import-Customer.jpg"
+                                                 style="max-width:100%;">
+                                            <h2 class="my-3" style="font-family: Montserrat;line-height: normal; margin:0 0 20px; text-align: center;font-weight: 700;font-size: 12px;padding: 0 10px;">
+                                                Import Customer from WooCommerce to Odoo
+                                            </h2>
+
+                                             </div>
+                                        </li>
+                                        <li class="col-sm-6 col-lg-3 mb-3 align-items-baseline font-weight-bold"
+                                            style="border-radius: 10px;font-size: 16px;">
+                                            <div data-toggle="modal" data-target="#features"style="overflow:hidden; background: #fff;box-shadow: 0 10px 29px 0 rgba(68,88,144,.1);text-align: center;
+        border:solid 1px #ddd; padding:5px; height:100%;">
+                                            <img alt="Import-Product"  src="preview_images/img/Import-Product.jpg"
+                                                 style="max-width:100%;">
+                                            <h2 class="my-3" style="font-family: Montserrat;line-height: normal; margin:0 0 20px; text-align: center;font-weight: 700;font-size: 12px;padding: 0 10px;">
+                                                Import Product from WooCommerce to Odoo
+                                            </h2>
+                                        </div>
+                                        </li>
+                                        <li class="col-sm-6 col-lg-3 mb-3 align-items-baseline font-weight-bold"
+                                            style="border-radius: 10px;font-size: 16px;">
+                                            <div data-toggle="modal" data-target="#features"style="overflow:hidden; background: #fff;box-shadow: 0 10px 29px 0 rgba(68,88,144,.1);text-align: center;
+        border:solid 1px #ddd; padding:5px; height:100%;">
+                                            <img alt="Import-Sale-Order"  src="preview_images/img/Import-Sale-Order.jpg" style="max-width:100%;">
+                                            <h2 class="my-3" style="font-family: Montserrat;line-height: normal; margin:0 0 20px; text-align: center;font-weight: 700;font-size: 12px;padding: 0 10px;">
+                                                Import Order from WooCommerce to Odoo
+                                            </h2>
+                                        </div>
+                                        </li>
+                                        <li class="col-sm-6 col-lg-3 mb-3 align-items-baseline font-weight-bold "
+                                            style="border-radius: 10px;font-size: 16px;">
+                                            <div data-toggle="modal" data-target="#features"style="overflow:hidden; background: #fff;box-shadow: 0 10px 29px 0 rgba(68,88,144,.1);text-align: center;
+        border:solid 1px #ddd; padding:5px; height:100%;">
+                                            <img alt="Export-Customer"  src="preview_images/img/Export-Customer.jpg" style="max-width:100%;">
+                                            <h2 class="my-3" style="font-family: Montserrat;line-height: normal; margin:0 0 20px; text-align: center;font-weight: 700;font-size: 12px;padding: 0 10px;">
+                                                Export Customer from Odoo to WooCommerce
+                                            </h2>
+                                        </div>
+                                        </li>
+                                        <li class="col-sm-6 col-lg-3 mb-3 align-items-baseline font-weight-bold "
+                                            style="border-radius: 10px;font-size: 16px;">
+                                            <div data-toggle="modal" data-target="#features"style="overflow:hidden; background: #fff;box-shadow: 0 10px 29px 0 rgba(68,88,144,.1);text-align: center;
+        border:solid 1px #ddd; padding:5px; height:100%;">
+                                            <img alt="Export-Product"  src="preview_images/img/Export-Product.jpg"
+                                                 style="max-width:100%;">
+                                            <h2 class="my-3" style="font-family: Montserrat;line-height: normal; margin:0 0 20px; text-align: center;font-weight: 700;font-size: 12px;padding: 0 10px;">
+                                                Export Product from Odoo to WooCommerce
+                                            </h2>
+                                        </div>
+
+                                        </li>
+                                        <li class="col-sm-6 col-lg-3 mb-3 align-items-baseline font-weight-bold "
+                                            style="border-radius: 10px;font-size: 16px;">
+                                            <div data-toggle="modal" data-target="#features"style="overflow:hidden; background: #fff;box-shadow: 0 10px 29px 0 rgba(68,88,144,.1);text-align: center;
+        border:solid 1px #ddd; padding:5px; height:100%;">
+                                            <img alt="Export-Order"  src="preview_images/img/Export-Order.jpg"
+                                                 style="max-width:100%;">
+                                            <h2 class="my-3" style="font-family: Montserrat;line-height: normal; margin:0 0 20px; text-align: center;font-weight: 700;font-size: 12px;padding: 0 10px;">
+                                                Export Order from Odoo to WooCommerce
+                                            </h2>
+                                        </div>
+                                        </li>
+                                        <li class="col-sm-6 col-lg-3 mb-3 align-items-baseline font-weight-bold "
+                                            style="border-radius: 10px;font-size: 16px;">
+                                            <div data-toggle="modal" data-target="#features" style="overflow:hidden; background: #fff;box-shadow: 0 10px 29px 0 rgba(68,88,144,.1);text-align: center; border:solid 1px #ddd; padding:5px; height:100%;">
+                                            <img alt="Sale-Order-Status"  src="preview_images/img/Sale-Order-Status.jpg"
+                                                 style="max-width:100%;">
+                                                 <h2 class="my-3" style="font-family: Montserrat;line-height: normal; margin:0 0 20px; text-align: center;font-weight: 700;font-size: 12px;padding: 0 10px;">
+                                            Update Order Status from Odoo to WooCommerce
+                                        </h2>
+                                        </div>
+                                        </li>
+                                    </ul>
+                        <!-- Featurs Modal -->
+                        <div class="modal fade pr-5 pr-sm-5 pr-md-0 pr-lg-0" id="features" tabindex="-1" role="dialog" aria-labelledby="featuresLabel" aria-hidden="true">
+                          <div class="modal-dialog px-1 pr-sm-0 pr-md-0 pr-lg-0" role="document" style="max-width: 650px;width: 100%;transform: translate(-50%, -50%);top: 50%;left: 50%;margin: 0;">
+                            <div class="modal-content">
+
+                                <div type="button" class="close" data-dismiss="modal" aria-label="Close" style="right: 0;text-align: right;position: absolute;background: rgba(0,0,0,0.5);padding: 12px;z-index: 9;color: #ffffff;">
+                                    <i class="fa fa-times"></i>
+                                </div>
+
+                              <div class="modal-body" style="padding: 0px;">
+                                <div id="features-ca" class="carousel slide" data-ride="carousel">
+
+                          <!-- Indicators -->
+                          <ul class="carousel-indicators" style="margin-bottom: 3rem;">
+                            <li data-target="#features-ca" data-slide-to="0" class="active"></li>
+                            <li data-target="#features-ca" data-slide-to="1"></li>
+                            <li data-target="#features-ca" data-slide-to="2"></li>
+                            <li data-target="#features-ca" data-slide-to="3"></li>
+                            <li data-target="#features-ca" data-slide-to="4"></li>
+                            <li data-target="#features-ca" data-slide-to="5"></li>
+                            <li data-target="#features-ca" data-slide-to="6"></li>
+                            <li data-target="#features-ca" data-slide-to="7"></li>
+
+                          </ul>
+
+                          <!-- The slideshow -->
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img alt="webhook"  src="preview_images/img/webhook.jpg"
+                                                                 style="max-width:100%;">
+                                <span style="min-height: 35px; text-align: center; display: block; padding-top: 3px; color: #000; font-size: large;">
+                                    WEBHOOK
+                                </span>
+                            </div>
+                            <div class="carousel-item">
+                              <img alt="Import-Customer"  src="preview_images/img/Import-Customer.jpg"
+                                                 style="max-width:100%;">
+                                <span style="min-height: 35px; text-align: center; display: block; padding-top: 3px; color: #000; font-size: large;">
+                                    Import Customer from WooCommerce to Odoo
+                                </span>
+                            </div>
+                            <div class="carousel-item">
+                              <img alt="Import-Product"  src="preview_images/img/Import-Product.jpg"
+                                                                 style="max-width:100%;">
+                                <span style="min-height: 35px; text-align: center; display: block; padding-top: 3px; color: #000; font-size: large;">
+                                    Import Product from WooCommerce to Odoo
+                                </span>
+                            </div>
+                              <div class="carousel-item">
+                              <img alt="Export-Customer"  src="preview_images/img/Export-Customer.jpg"
+                                                                 style="max-width:100%;">
+                                <span style="min-height: 35px; text-align: center; display: block; padding-top: 3px; color: #000; font-size: large;">
+                                    Import Order from WooCommerce to Odoo
+                                </span>
+                            </div>
+                              <div class="carousel-item">
+                              <img alt="Sale-Order-Status"  src="preview_images/img/Sale-Order-Status.jpg"
+                                                                 style="max-width:100%;">
+                                <span style="min-height: 35px; text-align: center; display: block; padding-top: 3px; color: #000; font-size: large;">
+                                    Export Customer from Odoo to WooCommerce
+                                </span>
+                            </div>
+                              <div class="carousel-item">
+                              <img alt="Export-Product"  src="preview_images/img/Export-Product.jpg"
+                                                                 style="max-width:100%;">
+                                <span style="min-height: 35px; text-align: center; display: block; padding-top: 3px; color: #000; font-size: large;">
+                                    Export Product from Odoo to WooCommerce
+                                </span>
+                            </div>
+                              <div class="carousel-item">
+                              <img alt="Export-Order"  src="preview_images/img/Export-Order.jpg"
+                                                                 style="max-width:100%;">
+                                <span style="min-height: 35px; text-align: center; display: block; padding-top: 3px; color: #000; font-size: large;">
+                                    Export Order from Odoo to WooCommerce
+                                </span>
+                            </div>
+                              <div class="carousel-item">
+                              <img alt="Sale-Order-Status"  src="preview_images/img/Sale-Order-Status.jpg"
+                                                                 style="max-width:100%;">
+                                <span style="min-height: 35px; text-align: center; display: block; padding-top: 3px; color: #000; font-size: large;">
+                                    Update Order Status from Odoo to WooCommerce
+                                </span>
+                            </div>
+                          </div>
+
+                          <!-- Left and right controls -->
+                          <a class="carousel-control-prev" href="#features-ca" data-slide="prev">
+                              <div style="background: rgba(0, 0, 0, 0.72);padding: 8px;display: flex;align-items: center;justify-content: center;border-radius: 50%;">
+                                <span class="carousel-control-prev-icon"></span>
+                            </div>
+                          </a>
+                          <a class="carousel-control-next" href="#features-ca" data-slide="next">
+                            <div style="background: rgba(0, 0, 0, 0.72);padding: 8px;display: flex;align-items: center;justify-content: center;border-radius: 50%;">
+                                <span class="carousel-control-next-icon"></span>
+                            </div>
+                          </a>
+                        </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                                </div>
+                            </div>
+
+                            <div id="pills-set_up">
+                                    <div class="text-left py-4 pt-5">
+                                        <h2 class="mb-3 display-4 text-center" style="font-size: 2.6rem; font-weight: 600">
+                                            <span style="color: #e32235;">How</span> to Setup</h2>
+                                    </div>
+
+                                    <!--Accordion wrapper-->
+                                    <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                                    <!-- Accordion card -->
+                                    <div class="card mb-3" style="border-radius:0.25rem;border-color: #dddddd; font-weight:600;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);">
+
+                                        <!-- Card header -->
+                                        <div class="card-header alert-info p-0 " role="tab" id="headingOne1" style="background: transparent;border-bottom: solid 1px #dddddd;">
+                                            <div class="d-flex justify-content-between pr-2" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                            aria-controls="collapseOne1">
+                                                <a style="color: #21272b;display: block;padding: .75rem 1.25rem;">
+                                                        1. Creating & generating API keys from your WooCommerce website
+                                                </a>
+                                                <span class="d-flex align-items-center justify-content-center"><i class="fa fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                                        data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;text-align: center;">
+                                                        Before using the module you need to generate the API from the WooCommerce Backend.
+                                                        In order to do the same, Go to WooCommerce > Settings > Click on Advanced
+                                                </p>
+                                                <img class="" src="setup/woo_1.png" alt="woo_1" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;text-align: center;">
+                                                        Once you click on “Advanced” tab, you need to create the API key which will be interacting with Odoo.
+                                                        In order to do the same, Go to, Advanced > Rest API > Click on Add keys
+                                                </p>
+                                                <img class="" src="setup/woo_2.png" alt="woo_2" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;text-align: center;">
+                                                        After clicking on “Add Keys” button, a page will be open, where you need to give the username and provide the permissions > Generate API key.
+                                                </p>
+                                                <img class="" src="setup/woo_3.png" alt="woo_3" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;text-align: center;">
+                                                        In order to maintain the keys for future use, you need to save them as shown below:
+                                                </p>
+                                                <img class="" src="setup/woo_4.png" alt="woo_4" style="max-width:100%;" >
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Accordion card -->
+                                    <div class="card mb-3" style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-bottom: solid 1px #ddd;border-radius:0.25rem;border-color: #ddd; font-weight:600;">
+                                        <!-- Card header -->
+                                        <div class="card-header alert-info p-0" role="tab" id="headingTwo2" style="background: transparent;border-bottom: solid 1px #dddddd;">
+                                            <div class="d-flex justify-content-between pr-2" style="cursor: pointer;" class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                                            aria-expanded="false" aria-controls="collapseTwo2">
+                                                <a  style="color: #21272b;display: block;padding: .75rem 1.25rem;">
+                                                    2. Creating & testing the WooCommerce Instance
+                                                </a>
+                                                <span class="d-flex align-items-center justify-content-center"><i class="fa fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
+                                        data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;text-align: center;">
+                                                        After installing the module you will be able to view that there is Woocommerce Menu created where in
+                                                        WooCommerce menu you can create the instance. WooCommerce > Configuration > Instances
+                                                </p>
+                                                <img class="" src="setup/woo_5.gif" alt="woo_5" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;text-align: center;">Click on the Create button to create a new instance.</p>
+                                                <img class="" src="setup/woo_6.png" alt="woo_6" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;text-align: center;"> Enter the name of your instance, WooCommerce Store URL, Consumer Key & Consumer Secret. If your WooCommerce store carries an SSL certificate, check ‘Verify SSL’,
+                                                    after putting all the information you can click on “Save” button.</p>
+                                                <img class="" src="setup/woo_7.png" alt="woo_7" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;text-align: center;">Once you are done with creating the instance, you can test your connection by clicking on Connect Instance
+                                                    button If everything is added properly you will receive a message on the same page “Connection Successful”.
+                                                    In case the connection is not successful you can correct the information entered.</p>
+                                                <img class="" src="setup/woo_8.gif" alt="woo_8" style="max-width:100%;" >
+                                            </div>
+
+                                        </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Accordion card -->
+
+                                    <!-- Accordion card -->
+                                    <div class="card mb-3" style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-bottom: solid 1px #ddd;border-radius:0.25rem;border-color: #ddd; font-weight:600">
+
+                                        <!-- Card header -->
+                                        <div class="card-header alert-info p-0 " role="tab" id="headingThree3" style="background: transparent;border-bottom: solid 1px #dddddd;">
+                                            <div  class="d-flex justify-content-between pr-2" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3"
+                                            aria-expanded="false" aria-controls="collapseThree3">
+                                                <a style="color: #21272b;display: block;padding: .75rem 1.25rem;">
+                                                    3. Configure & activate the WooCommerce instance
+                                                </a>
+                                                <span class="d-flex align-items-center justify-content-center"><i class="fa fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
+                                        data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                    After your instance get connected, you need to setup basic details for WooCommerce instance.</p>
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                    In Configuration tab you need to fill the below details as stated:</p>
+                                                    <ul style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        <li>Warehouse:<span style="font-size: 14px;"> Select the warehouse from where you wish to manage WooCommerce Inventory.</span></li>
+                                                        <li>Currency:<span style="font-size: 14px;"> Select the currency used by your WooCommerce Store.</span></li>
+                                                    </ul>
+                                                </div>
+                                                <img class="" src="setup/woo_9.png" alt="woo_9" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                    In Configuration tab you need to fill the below details as stated:</p>
+                                                    <ul style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        <li>Stock Field Type:<span style="font-size: 14px;"> Select the stock field of product whose quantity will be updated as WooCommerce Inventory.</span></li>
+                                                    </ul>
+                                                </div>
+                                                <img class="" src="setup/woo_10.png" alt="woo_10" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            In Order tab you need to complete the below details as stated:</p>
+                                                    <ul style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        <li>Order State Configuration:<span style="font-size: 14px;">  Select the sync WooCommerce order status Orders which you wish to import in Odoo</span></li>
+                                                        <li>Sales Team: <span style="font-size: 14px;">Select the Sales Team for WooCommerce Orders</span></li>
+                                                        <li>Sales Person: <span style="font-size: 14px;">  Select the Sales Person for WooCommerce Orders</span></li>
+                                                        <li>WooCommerce Fees: <span style="font-size: 14px;">  Select the Fees Product for WooCommerce orders</span></li>
+                                                        <li>WooCommerce Shipping Fees: <span style="font-size: 14px;">  Select the Shipping Fees Product for WooCommerce orders</span></li>
+
+                                                    </ul>
+                                                </div>
+                                                <img class="" src="setup/woo_11.png" alt="woo_11" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        In Accounting tab you need to complete the below details:</p>
+                                                    <ul style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        <li>Payment Method:<span style="font-size: 14px;"> Select the payment journal that need to be set at the time of register invoice payment if not set in WooCommerce Payment Gateway</span></li>
+                                                    </ul>
+                                                </div>
+                                                <img class="" src="setup/woo_12.png" alt="woo_12" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            In Automatic Jobs tab you need to fill the details for automatic process for Import Order, Import Product, Update Order Status and Update Product Stock.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_13.png" alt="woo_13" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        In Webhooks tab you will notice the Topic and its Delivery URL on the basis of WooCommerce Instance to implement Webhook on WooCommerce Side.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_webhook.png" alt="woo_webhook" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        After Configuring all the required fields, click on "Activate Instance" to perform the synchronization operations.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_15.png" alt="woo_15" style="max-width:100%;" >
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Accordion card -->
+                                    <div class="card mb-3" style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-bottom: solid 1px #ddd;border-radius:0.25rem;border-color: #ddd; font-weight:600">
+
+                                        <!-- Card header -->
+                                        <div class="card-header alert-info p-0 " role="tab" id="headingThree4" style="background: transparent;border-bottom: solid 1px #dddddd;">
+                                            <div class="d-flex justify-content-between pr-2" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree4"
+                                            aria-expanded="false" aria-controls="collapseThree4" >
+                                                <a style="color: #21272b;display: block;padding: .75rem 1.25rem;">
+                                                    4. Odoo WooCommerce Connector Dashboard
+                                                </a>
+                                                <span class="d-flex align-items-center justify-content-center"><i class="fa fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseThree4" class="collapse" role="tabpanel" aria-labelledby="headingThree4"
+                                        data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            You can overview the details of multiple created WooCommerce Instances from the dashboard and manage them as per your need.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_16.png" alt="woo_16" style="max-width:100%;" >
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card mb-3" style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-bottom: solid 1px #ddd;border-radius:0.25rem;border-color: #ddd; font-weight:600">
+
+                                        <!-- Card header -->
+                                        <div class="card-header alert-info p-0" role="tab" id="headingThree5" style="background: transparent;border-bottom: solid 1px #dddddd;">
+                                            <div class="d-flex justify-content-between pr-2" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree5"
+                                            aria-expanded="false" aria-controls="collapseThree5">
+                                                <a style="color: #21272b;display: block;padding: .75rem 1.25rem;">
+                                                    5. Configure the Webhooks
+                                                </a>
+                                                <span class="d-flex align-items-center justify-content-center"><i class="fa fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseThree5" class="collapse" role="tabpanel" aria-labelledby="headingThree5"
+                                        data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            You can manually sync your data or you can implement webhooks on WooCommerce side to create or update the records on Odoo in Real Time.</p>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            Click on the configuration of the WooCommerce Instance for which you wish to configure the Webhook.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_config.png" alt="woo_config" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            Click on the Webhooks tab as shown below, Here you will notice the Delivery URLs according to the Topic for the configuration of WooCommerce WebHook.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_webhook.png" alt="woo_webhook" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            Now, you need to setup the Webhook from the WooCommerce Backend for that, Go to WooCommerce > Settings > Advanced > webhook > Click on “Add Webhook” button to create a new WebHook.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_23.png" alt="woo_23" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            Now you need to enter the Name , Status, Topic, Delivery URL, Secret, API Version and then click on “Save Webhook”</p>
+                                                </div>
+                                                <img class="" src="setup/woo_24.png" alt="woo_24" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        After saving you will receive a message as “Webhook updated successfully” if the Webhook is successfully updated.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_25.png" alt="woo_25" style="max-width:100%;" >
+                                                <p class="mt-3" style="color: #ffffff;font-size: 16px;line-height: 1.4;">Note: Enter the Delivery URL as the URL defined under the “Webhooks Tab” according to the Topic of WebHook.</p>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card mb-3" style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-bottom: solid 1px #ddd;border-radius:0.25rem;border-color: #ddd; font-weight:600">
+
+                                        <!-- Card header -->
+                                        <div class="card-header alert-info p-0" role="tab" id="headingThree6" style="background: transparent;border-bottom: solid 1px #dddddd;">
+                                            <div class="d-flex justify-content-between pr-2" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree6"
+                                            aria-expanded="false" aria-controls="collapseThree6" >
+                                                <a style="color: #21272b;display: block;padding: .75rem 1.25rem;">
+                                                    6. Automatic Jobs
+                                                </a>
+                                                <span class="d-flex align-items-center justify-content-center"><i class="fa fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseThree6" class="collapse" role="tabpanel" aria-labelledby="headingThree6"
+                                        data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            You can manually sync your data or you can activate cron to do the syncing automatically.</p>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;"> You can manually sync your data or you can activate cron to do the syncing automatically. Click on the configuration of the WooCommerce Instance , for which you wish to configure the Automatic jobs</p>
+                                                </div>
+                                                <img class="" src="setup/woo_config.png" alt="woo_config" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            Click on the Automatic Jobs tab > Check the operations for which you wish to set up the Cron Automatic Jobs and click on Save</p>
+                                                </div>
+                                                <img class="" src="setup/woo_18.png" alt="woo_18" style="max-width:100%;" >
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            Note:</p>
+                                                    <ul style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        <li><span style="font-size: 14px;">The Last updated field will auto update after the execution of the specific cron automatic job.</span></li>
+                                                        <li><span style="font-size: 14px;">Please make sure that the Instance is Active before moving forward.</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                            Go to Settings, and then Activate the developer mode</p>
+                                                </div>
+                                                <img class="" src="setup/woo_19.png" alt="woo_19" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                    Now go to Settings > Technical > Scheduled Actions > The Auto Cron jobs are as shown below:</p>
+                                                </div>
+                                                <img class="" src="setup/woo_20.png" alt="woo_20" style="max-width:100%;" >
+                                            </div>
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        Activate the Cron Job you want to perform for that you need to select the Auto Cron Job > Action > Click on Unarchive button</p>
+                                                </div>
+                                                <img class="" src="setup/woo_21.png" alt="woo_21" style="max-width:100%;" >
+                                                <img class="mt-3" src="setup/woo_22.png" alt="woo_22" style="max-width:100%;" >
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card mb-3" style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-bottom: solid 1px #ddd;border-radius:0.25rem;border-color: #ddd; font-weight:600">
+
+                                        <!-- Card header -->
+                                        <div class="card-header alert-info p-0" role="tab" id="headingThree7" style="background: transparent;border-bottom: solid 1px #dddddd;">
+                                            <div class="d-flex justify-content-between pr-2" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree7"
+                                            aria-expanded="false" aria-controls="collapseThree7">
+                                                <a style="color: #21272b;display: block;padding: .75rem 1.25rem;">
+                                                    7. WooCommerce Logs
+                                                </a>
+                                                <span class="d-flex align-items-center justify-content-center"><i class="fa fa-chevron-down"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseThree7" class="collapse" role="tabpanel" aria-labelledby="headingThree7"
+                                        data-parent="#accordionEx">
+                                        <div class="card-body">
+                                            <div class="px-1 px-sm-2 px-md-3 px-lg-3 py-4 mb-3" style="background-image: url('setup/1.png')">
+                                                <div>
+                                                    <p style="color: #ffffff;font-size: 16px;line-height: 1.4;">
+                                                        This will allow user to view the entire logs of the operations with respect to unsuccessful and successful status, so that you can keep a track on the records synced.</p>
+                                                </div>
+                                                <img class="" src="setup/woo_log.png" alt="woo_log" style="max-width:100%;" >
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+                                    </div>
+                                    <!-- Accordion wrapper -->
+                                </div>
+
+
+            <div id="pills-releases" class="mt-5 pt-5" style="padding: 30px 0 70px; background: #f8f8f8">
+                         <div class="tab-pane">
+                            <h2 class="mb-4 display-4 text-center" style="font-size: 2.6rem; font-weight: 600">
+                                <span style="color: #e32235;">Our</span> Releases</h2>
+                                <div class="row justify-content-center">
+                        <div class="col-sm-8" style="position: relative;">
+
+
+
+                        <span style="width:4px;height:100%;background-color:#e32235;position:absolute;top: 0;left: 55px;"></span>
+                        <div>
+                            <div style="margin-bottom: 30px; position: relative; padding-left: 80px;">
+                                <div style="top: 50%;min-width: 65px;position: absolute;left: 0;box-sizing: border-box;padding: 10px;text-align: center;background-color: #e32235;color: #fff;transform: translate(0, -50%);border-top-left-radius: 5px;border-bottom-left-radius: 5px;">
+                                  <span style="font-size: 20px; font-weight: 700;display: block;">27<sup>th</sup></span>
+                                  <span style="display: block;font-size: 0.8em;text-transform: uppercase;">Mar, 2020 </span>
+                                </div>
+                                <div style="padding: 1.5rem 2rem;border-top-right-radius: 10px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);background-color: #fff;border-bottom-right-radius: 10px;">
+                                  <div class="timeline__content">
+                                    <h3 style="font-weight: 400; margin-bottom:20px">Latest Release 2.3.0</h3>
+                                    <p style="color:#666; margin-bottom: 10px;"> <span style="font-size:12px;position:relative;top:-2px;">&#9632;</span> Enhancement- Implemented Multi Currency.</p>
+                                  </div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 30px; position: relative; padding-left: 80px;">
+                                <div style="top: 50%;min-width: 65px;position: absolute;left: 0;box-sizing: border-box;padding: 10px;text-align: center;background-color: #e32235;color: #fff;transform: translate(0, -50%);border-top-left-radius: 5px;border-bottom-left-radius: 5px;">
+                                  <span style="font-size: 20px; font-weight: 700;display: block;">20<sup>th</sup></span>
+                                  <span style="display: block;font-size: 0.8em;text-transform: uppercase;">Mar, 2020 </span>
+                                </div>
+                                <div style="padding: 1.5rem 2rem;border-top-right-radius: 10px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);background-color: #fff;border-bottom-right-radius: 10px;">
+                                  <div class="timeline__content">
+                                    <h3 style="font-weight: 400; margin-bottom:20px">Release 2.2.0</h3>
+                                    <p style="color:#666; margin-bottom: 10px;"> <span style="font-size:12px;position:relative;top:-2px;">&#9632;</span> Enhancement- Implemented Queue Manager for export process</p>
+                                    <p style="color:#666; margin-bottom: 10px;">
+                                        <span style="font-size:12px;position:relative;top:-2px;">&#9632;</span> Fix- Improve discount process on sale order line.</p>
+                                  </div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 30px; position: relative; padding-left: 80px;">
+                                <div style="top: 50%;min-width: 65px;position: absolute;left: 0;box-sizing: border-box;padding: 10px;text-align: center;background-color: #e32235;color: #fff;transform: translate(0, -50%);border-top-left-radius: 5px;border-bottom-left-radius: 5px;">
+                                  <span style="font-size: 20px; font-weight: 700;display: block;">06<sup>th</sup></span>
+                                  <span style="display: block;font-size: 0.8em;text-transform: uppercase;">Mar, 2020 </span>
+                                </div>
+                                <div style="padding: 1.5rem 2rem;border-top-right-radius: 10px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);background-color: #fff;border-bottom-right-radius: 10px;">
+                                  <div class="timeline__content">
+                                    <h3 style="font-weight: 400; margin-bottom:20px">Release 2.1.0</h3>
+                                    <p style="color:#666; margin-bottom: 10px;"> <span style="font-size:12px;position:relative;top:-2px;">&#9632;</span> Enhancement- Implemented Individual Syncing</p>
+                                  </div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 30px; position: relative; padding-left: 80px;">
+                                <div style="top: 50%;min-width: 65px;position: absolute;left: 0;box-sizing: border-box;padding: 10px;text-align: center;background-color: #e32235;color: #fff;transform: translate(0, -50%);border-top-left-radius: 5px;border-bottom-left-radius: 5px;">
+                                  <span style="font-size: 20px; font-weight: 700;display: block;">21<sup>st</sup></span>
+                                  <span style="display: block;font-size: 0.8em;text-transform: uppercase;">Feb, 2020 </span>
+                                </div>
+                                <div style="padding: 1.5rem 2rem;border-top-right-radius: 10px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);background-color: #fff;border-bottom-right-radius: 10px;">
+                                  <div class="timeline__content">
+                                    <h3 style="font-weight: 400; margin-bottom:20px">Release 2.0.2</h3>
+                                    <p style="color:#666; margin-bottom: 10px;"> <span style="font-size:12px;position:relative;top:-2px;">&#9632;</span> Enhancement- Compatible with Odoo-13.0 Latest addons.</p>
+                                    <p style="color:#666; margin-bottom: 10px;"> <span style="font-size:12px;position:relative;top:-2px;">&#9632;</span> Fix- Change Invoice state after creating invoice in Draft state.</p>
+                                  </div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 30px; position: relative; padding-left: 80px;">
+                                <div style="top: 50%;min-width: 65px;position: absolute;left: 0;box-sizing: border-box;padding: 10px;text-align: center;background-color: #e32235;color: #fff;transform: translate(0, -50%);border-top-left-radius: 5px;border-bottom-left-radius: 5px;">
+                                  <span style="font-size: 20px; font-weight: 700;display: block;">19<sup>th</sup></span>
+                                  <span style="display: block;font-size: 0.8em;text-transform: uppercase;">Feb, 2020 </span>
+                                </div>
+                                <div style="padding: 1.5rem 2rem;border-top-right-radius: 10px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);background-color: #fff;border-bottom-right-radius: 10px;">
+                                  <div class="timeline__content">
+                                    <h3 style="font-weight: 400; margin-bottom:20px">Release 2.0.1</h3>
+                                    <p style="color:#666; margin-bottom: 10px;"> <span style="font-size:12px;position:relative;top:-2px;">&#9632;</span> Fix- Change Order Status of Woo-Commerce Orders.</p>
+                                  </div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 30px; position: relative; padding-left: 80px;">
+                                <div style="top: 50%;min-width: 65px;position: absolute;left: 0;box-sizing: border-box;padding: 10px;text-align: center;background-color: #e32235;color: #fff;transform: translate(0, -50%);border-top-left-radius: 5px;border-bottom-left-radius: 5px;">
+                                  <span style="font-size: 20px; font-weight: 700;display: block;">14<sup>th</sup></span>
+                                  <span style="display: block;font-size: 0.8em;text-transform: uppercase;">Feb, 2020 </span>
+                                </div>
+                                <div style="padding: 1.5rem 2rem;border-top-right-radius: 10px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);background-color: #fff;border-bottom-right-radius: 10px;">
+                                  <div class="timeline__content">
+                                    <h3 style="font-weight: 400; margin-bottom:20px">Release 2.0.0</h3>
+                                    <p style="color:#666; margin-bottom: 10px;"> <span style="font-size:12px;position:relative;top:-2px;">&#9632;</span> Enhancement- Added queue for background processing on import data.That has reduced loading time while importing data from WooCommerce to Odoo.</p>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                         </div>
+                    </div>
+                    <div id="pills-common-mistakes" class="pt-5">
+                        <h5 class="mb-4 display-4 text-center" style="font-size: 2.0rem; font-weight: 600">
+                                <span style="color: #e32235;">Points to Keep in Mind While Configuring</span></h5>
+                        <ul class="list-unstyled mt-5 my-5">
+                            <li class="mb-4 d-flex align-items-baseline bg-white"
+                                style="border-radius: 10px;padding: 15px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border: solid 1px #ddd;">
+                                <span style="font-size:12px;position:relative;top:-2px; margin-right: 10px;">&#9632;</span>
+                                <div class="">
+                                    <h6 class="font-weight-bold"> ERROR : &lt;!DOCTYPE html&gt; </h6>
+                                    <span style="font-size:14px; color: #3b464c"><b>Reason and Solution :</b> This error occurs when you are not providing the correct WooCommerce Store URL. So please make sure that you are providing the correct URL  or check if there aren't any empty space before the link. And if your URL is correct then Please make sure the Post name flag is enable in your woocommerce site. Path for your reference Settings --> Peramlink --> Post name</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                         </div>
+                    </div>
+                    <div id="pills-faqs" class="pt-5">
+                        <h2 class="mb-4 display-4 text-center" style="font-size: 2.6rem; font-weight: 600">
+                                <span style="color: #e32235;">FAQ's</span></h2>
+                        <ul class="list-unstyled mt-5 my-5">
+                            <li class="mb-4 d-flex align-items-baseline bg-white"
+                                style="border-radius: 10px;padding: 15px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border: solid 1px #ddd;">
+                                <span style="font-size:12px;position:relative;top:-2px; margin-right: 10px;">&#9632;</span>
+                                <div class="">
+                                    <h6 class="font-weight-bold">Is this app compatible with Multi Currency?</h6>
+                                    <span style="font-size:14px; color: #3b464c">Yes, our app supports Multi Currency.</span>
+                                </div>
+                            </li>
+
+                            <li class="mb-4 d-flex align-items-baseline bg-white"
+                                style="border-radius: 10px;padding: 15px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border: solid 1px #ddd;">
+                                <span style="font-size:12px;position:relative;top:-2px; margin-right: 10px;">&#9632;</span>
+                                <div class="">
+                                    <h6 class="font-weight-bold">Is this app compatible with Odoo Enterprise?</h6>
+                                    <span style="font-size:14px; color: #3b464c">Yes, our app works with Odoo Enterprise as well as Community.</span>
+                                </div>
+                            </li>
+
+                            <li class="mb-4 d-flex align-items-baseline bg-white"
+                                style="border-radius: 10px;padding: 15px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border: solid 1px #ddd;">
+                                <span style="font-size:12px;position:relative;top:-2px; margin-right: 10px;">&#9632;</span>
+                                <div class="">
+                                    <h6 class="font-weight-bold">Need some customization in this app, whom to contact?</h6>
+                                    <span style="font-size:14px; color: #3b464c">Please drop email at sales@ksolves.com or raise a
+                                            ticket through Odoo store itself.</span>
+                                </div>
+                            </li>
+
+                            <li class="mb-4 d-flex align-items-baseline bg-white"
+                                style="border-radius: 10px;padding: 15px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border: solid 1px #ddd;">
+                                <span style="font-size:12px;position:relative;top:-2px; margin-right: 10px;">&#9632;</span>
+                                <div class="">
+                                    <h6 class="font-weight-bold">Do you provide any free support?</h6>
+                                    <span style="font-size:14px; color: #3b464c">Yes, we do provide free support for 90 days for
+                                            any queries or any bug/issue fixing.</span>
+                                </div>
+                            </li>
+
+                            <li class="mb-4 d-flex align-items-baseline bg-white"
+                                style="border-radius: 10px;padding: 15px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border: solid 1px #ddd;">
+                                <span style="font-size:12px;position:relative;top:-2px; margin-right: 10px;">&#9632;</span>
+                                <div class="">
+                                    <h6 class="font-weight-bold">Do sync Woocommerce Coupons?</h6>
+                                    <span style="font-size:14px; color: #3b464c">Yes, you can sync coupons data.</span>
+                                </div>
+                            </li>
+
+                            <li class="mb-4 d-flex align-items-baseline bg-white"
+                                style="border-radius: 10px;padding: 15px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border: solid 1px #ddd;">
+                                <span style="font-size:12px;position:relative;top:-2px; margin-right: 10px;">&#9632;</span>
+                                <div class="">
+                                    <h6 class="font-weight-bold"> Does it supports sub-sub-categories's import/export ?</h6>
+                                    <span style="font-size:14px; color: #3b464c">Yes, with this app you can move sub-sub-categories from Woo-Commerce to Odoo and vice-versa.</span>
+                                </div>
+                            </li>
+
+                            <li class="mb-4 d-flex align-items-baseline bg-white"
+                                style="border-radius: 10px;padding: 15px;box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border: solid 1px #ddd;">
+                                <span style="font-size:12px;position:relative;top:-2px; margin-right: 10px;">&#9632;</span>
+                                <div class="">
+                                    <h6 class="font-weight-bold"> Do this app supports weebhooks ?</h6>
+                                    <span style="font-size:14px; color: #3b464c">Yes, this app supports webhooks but only with single database.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+        <div class="text-center p-3 mt-4 mb-5" style="clear: both; background-color: #8BC6EC;border-radius: 5px;background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%);">
+            <marquee behavior="alternate" class="w-50">
+                <h3 class="font-weight-bold" style="font-family: 'roboto','sans-serif';color: #e33936 !important;">FREE 90 DAYS SUPPORT</h3>
+            </marquee>
+            <h5 class="mx-0 mx-sm-0 mx-md-0 mx-lg-5 px-0 px-sp-3 px-md-5 px-lg-5" style="line-height: 1.5;font-weight: 400;font-family: 'roboto','sans-serif';color: #333333;">Ksolves will provide FREE 90
+                days support for any doubt, queries, and bug fixing
+                (excluding data recovery) or any type of issues related to this module. This is
+                applicable from the date of purchase.
+            </h5>
+        </div>
+
+        <div class="my-4">
+            <div class="text-center p-2 d-flex justify-content-center align-items-center col-lg-9" style="background-color: #FF9A8B;
+                        background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+                        box-shadow: 1px 2px 11px rgba(0, 0, 0, 0), 1px 11px 12px rgba(0, 0, 0, 0.22);margin: auto;">
+                <h3 class="font-weight-bold mb-0 mr-3 text-light">Note: </h3>
+                <h5 class="mb-0 text-light" style="margin-top: 2px;">
+                    Extensively Tested on Odoo Vanilla with Ubuntu OS
+                </h5>
+            </div>
+        </div>
+
+        <!-- Popular Apps -->
+        <div class="row pb-sm-5">
+            <h2 class="w-100 text-center mb-3" style="font-weight: 400;">Ksolves Suggested Apps</h2>
+            <div class="text-center w-100 mb-1">
+                <img src="images/line.png" alt="ksolves">
+            </div>
+            <div id="demo" class="carousel slide pb-5 col-12 col-lg-8 mx-auto" data-ride="carousel">
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" style="background-color: #9d7092;" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" style="background-color: #9d7092;" data-slide-to="1"></li>
+                </ul>
+                <!-- The slideshow -->
+                <div class="carousel-inner pt-4 pt-lg-5 ">
+                    <div class="carousel-item px-4 active">
+                        <div class="row pb-sm-4 no-lg-gutters">
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_dashboard_ninja/" class="d-block" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/dashboard-ninja.png" alt="dashboard-ninja">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Dashboard <br> Ninja</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_list_view_manager/" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/list-view-manager.png" alt="list-view-manager">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">List View <br> Manager</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_sticky_pivot_view/" class="d-block" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/sticky-pivot-view.png" alt="sticky-pivot-view">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Sticky  <br>Pivot View</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/11.0/ks_oneclick_sale_purchase/" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/one-click-sale.png" alt="list-view-manager">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">One Click <br>Sale/Purchase</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row pt-3 pb-4 no-gutters">
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_theme_base/" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/ksolves-theme-base.png" alt="ksolves-theme-base">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Ksolves <br>Theme Base</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_pos_order_notes/" class="d-block" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/pos-per-item.png" alt="pos-per-item">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">POS Per Item <br>& Order Note</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_pos_dashboard_ninja/" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/pos_dashboard_ninja.png" alt="pos_dashboard_ninja">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">POS <br>Dashboard Ninja</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/web_listview_sticky_header/" class="d-block" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/listview_sticky_header.png" alt="listview_sticky_header">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">List View <br>Sticky Header</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item px-4">
+                        <div class="row pb-sm-4 no-gutters">
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_pos_low_stock_alert/" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/pos_low_stock_alert.png" alt="POS Low Stock Alert">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">POS Low<br>Stock Alert</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_office365_calendar/" class="d-block" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/office365_calendar.png" alt="Office365 Calendar">
+                                     <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Office 365<br>Calendar</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_chat_edit_and_delete/" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/chat_edit_and_delete.png" alt="chat_edit_and_delete">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Odoo Chat <br>Edit/Delete</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_office365_contacts/" class="d-block" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/office365_contact.png" alt="Office365 Contacts">
+                                     <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Office 365<br>Contacts</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row pt-3 pb-4 no-gutters">
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/13.0/ks_product_variant_extra_price/" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/pvep.png" alt="product_variant_extra_price">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Product Variant <br>Extra Price</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_toggle_switch/" class="d-block" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/toggle_switch.png" alt="toggle_switch">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Toggle <br>Switch</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/odoo_paytm_gateway/" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/odoo_paytm_gateway.png" alt="odoo_paytm_gateway">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Odoo Paytm <br>Gateway</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6 col-sm-3 text-center">
+                                <a href="https://apps.odoo.com/apps/modules/12.0/ks_low_stock_alert/" class="d-block" target="_blank" style="text-decoration: none;">
+                                    <img src="images/app-logo/low_stock_alert.png" alt="low_stock_alert">
+                                    <div class="card-body text-center p-0 mt-3 mb-3 mb-lg-0">
+                                        <h5 class="card-text m-0" style="font-size: 16px; font-weight: 600">Low Stock<br>Alert</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev" style="left: -5%; width: 60px;">
+                    <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next" style="right: -5%; width: 60px;">
+                    <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Ksolves Odoo Services -->
+        <div class="row pb-sm-5 px-1 pb-4">
+            <h2 class="w-100 text-center my-3" style="font-weight: 400;">Ksolves Odoo Services</h2>
+            <div class="text-center w-100 mb-4">
+                <img src="images/line.png" alt="ksolves">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+                <div class="card text-center" style="min-height: 90px;background-color: #8BC6EC;background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%); height:100%;">
+                    <div class="pt-4">
+                        <img src="images/Odoo-Implementation.svg" alt="Odoo-Implementation" style="width: 64px;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 19px; font-weight: 400;color: #000000;">Odoo Implementation</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+                <div class="card text-center" style="min-height: 90px;background-color: #8BC6EC;background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%); height:100%;">
+                    <div class="pt-4">
+                        <img src="images/Odoo-Community-Apps.svg" alt="Odoo-Community-Apps" style="width: 64px;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 19px; font-weight: 400;color: #000000;">Odoo Community Apps</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+                <div class="card text-center" style="min-height: 90pxb;ackground-color: #8BC6EC;background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%); height:100%;">
+                    <div class="pt-4">
+                        <img src="images/Odoo-Support-Maintenance.svg" alt="Odoo-Support-Maintenance" style="width: 64px;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 19px; font-weight: 400;color: #000000;">Odoo Support &amp; Maintenance</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+                <div class="card text-center" style="min-height: 90px;background-color: #8BC6EC;background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%); height:100%;">
+                    <div class="pt-4">
+                        <img src="images/Odoo-Customization.svg" alt="Odoo-Customization" style="width: 64px;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title " style="font-size: 19px; font-weight: 400;color: #000000;">Odoo Customization</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+                <div class="card text-center" style="min-height: 90px;background-color: #8BC6EC;background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%); height:100%;">
+                    <div class="pt-4">
+                        <img src="images/Odoo-Integration-Services.svg" alt="Odoo-Integration-Services" style="width: 64px;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title " style="font-size: 19px; font-weight: 400;color: #000000;">Odoo Integration Services</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+                <div class="card text-center" style="min-height: 90px;background-color: #8BC6EC;background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%); height:100%;">
+                    <div class="pt-4">
+                        <img src="images/Odoo-Developer-Outsourcing.svg" alt="Odoo-Developer-Outsourcing" style="width: 64px;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 19px; font-weight: 400;color: #000000;">Odoo Developer Outsourcing</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ksolves Footer -->
+        <div>
+            <div class="row no-gutters mx-0 justify-content-sm-between justify-content-center" style="border-top: 1px solid black;">
+                <div class="mb-sm-0 mb-3 d-flex align-items-center">
+                   <img src="images/letter.svg" style="width: 35px;height: 35px;margin-right: 20px" />
+                    <span style="font-size: 18px;">sales@ksolves.com</span>
+                </div>
+                <div class="d-none d-sm-block">
+                    <div class="bg-white" style="width: 50px;height: 1px;margin-top: -1px"></div>
+                    <div style="border-right: 1px solid black;height: 50px;transform: translateX(-50%);"></div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <span style="font-size: 18px;">+91 120-4299799‬</span>
+                    <img src="images/smartphone.svg" style="width: 35px;height: 35px;margin-left: 20px;" />
+                </div>
+            </div>
+        </div>
+        <!-- container End -->
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

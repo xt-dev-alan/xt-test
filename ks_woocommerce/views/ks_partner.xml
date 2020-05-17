@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--Server Action for Exporting or Updating Customers from Odoo to WooCommerce-->
+    <record id="ks_update_woocommerce_partner" model="ir.actions.server">
+        <field name="name">Export &amp; Update Customers </field>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="state">code</field>
+        <field name="code">
+            records.ks_update_customer_to_woo()
+        </field>
+    </record>
+
+    <record id="ks_import_woocommerce_partner" model="ir.actions.server">
+        <field name="name">Import Customer</field>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="state">code</field>
+        <field name="code">
+            records.ks_update_customer_to_odoo()
+        </field>
+    </record>
+
+    <!-- Form view for WooCommerce Customers-->
+    <record id="ks_form_woocommerce_customer" model="ir.ui.view">
+        <field name="name">ks.woo.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="woo_info" string="WooCommerce Info" groups="ks_woocommerce.ks_woocommerce_group">
+                    <group>
+                        <group>
+                            <field name="ks_woo_instance_id" options="{'no_create':True,'no_create_edit': True}" attrs="{'readonly': [('ks_export_in_wo', '!=', False)]}"/>
+                            <field name="ks_woo_username" attrs="{'readonly': [('ks_woo_username', '!=', False),
+                            ('ks_woo_id', '!=', False)]}"/>
+                            <field name="ks_export_in_wo" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="ks_woo_id" readonly="1"/>
+                            <field name="ks_date_created" readonly="1"/>
+                            <field name="ks_date_updated" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tree View for WooCommerce Customer-->
+    <record id="ks_tree_woocommerce_customer" model="ir.ui.view">
+        <field name="name">ks.woo.partner.tree</field>
+        <field name="model">res.partner</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="ks_woo_instance_id" groups="ks_woocommerce.ks_woocommerce_group"/>
+                <field name="ks_woo_id" groups="ks_woocommerce.ks_woocommerce_group"/>
+                <field name="ks_export_in_wo" groups="ks_woocommerce.ks_woocommerce_group"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Search View for WooCommerce Customer-->
+    <record id="ks_res_partner_search_view" model="ir.ui.view">
+        <field name="name">ks.res.partner.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="ks_woo_username" string="Woo Username" filter_domain="[('ks_woo_username','ilike',self)]"/>
+                <field name="ks_woo_id" string="Woo Id" filter_domain="[('ks_woo_id','ilike',self)]"/>
+                <field name="ks_woo_instance_id" string="Woo Instance Id" filter_domain="[('ks_woo_instance_id','ilike',self)]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Woo Instance Id" name="ks_woo_instance_id" context="{'group_by':'ks_woo_instance_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Window Action for WooCommerce Customers-->
+    <record model="ir.actions.act_window" id="action_woocommerce_res_partner">
+        <field name="name">WooCommerce Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('ks_woo_id','&gt;',0)]</field>
+        <field name="context">{'tree_view_ref': 'ks_woocommerce.ks_tree_woocommerce_customer' }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                **All the WooCommerce Customers will appear here.
+            </p>
+        </field>
+    </record>
+
+    <!--    Menuitem for Woo Customers-->
+    <menuitem id="menu_ks_woocomerce_res_partner"
+              name="Customers"
+              parent="menu_ks_woocomerce_base"
+              action="action_woocommerce_res_partner"
+              sequence="1"
+              groups="ks_woocommerce.ks_woocommerce_group"
+    />
+
+</odoo>

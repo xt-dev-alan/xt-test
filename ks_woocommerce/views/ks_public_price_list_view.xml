@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--Inherited Form View for Product Pricelist-->
+    <record id="ks_product_pricelist_form_view" model="ir.ui.view">
+        <field name="name">ks.product.pricelist.form</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="ks_instance_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Inherited Form View for Product Pricelist Item-->
+    <record id="ks_inherit_product_pricelist_item_form_view" model="ir.ui.view">
+        <field name="name">ks.product.inherit.pricelist.item.form</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_end']" position="after">
+                <field name="ks_instance_id" invisible="1"/>
+                <field name="ks_on_sale_price" attrs="{'invisible': [('ks_instance_id', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ks_inherit_product_pricelist_form_view" model="ir.ui.view">
+        <field name="name">ks.product.inherit.pricelist.form</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='item_ids']" position="replace">
+                <field name="item_ids" nolabel="1" context="{'default_base':'list_price'}">
+                    <tree string="Pricelist Items" editable="bottom">
+                        <field name="product_tmpl_id" string="Products" required="1"/>
+                        <field name="product_id" string="Variants"
+                               groups="product.group_product_variant"
+                               domain="[('product_tmpl_id', '=', product_tmpl_id)]" options="{'no_create':1}"/>
+                        <field name="min_quantity"/>
+                        <field name="fixed_price" string="Price"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="pricelist_id" invisible="1"/>
+                        <!-- Pricelist ID is here only for related fields to be correctly computed -->
+                        <field name="date_start"/>
+                        <field name="date_end"/>
+                        <field name="base" invisible="1"/>
+                        <field name="applied_on" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="ks_on_sale_price"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

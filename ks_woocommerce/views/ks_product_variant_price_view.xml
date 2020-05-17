@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Inherited Normal Form view for Product Variant-->
+    <record id="ks_product_product_woo_form_view" model="ir.ui.view">
+        <field name="name">ks.product.variant.woo.form.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales']" position="after">
+                <page name="woocommerce_info" string="WooCommerce Info" attrs="{'invisible':[('ks_to_be_export','=',False)]}" groups="ks_woocommerce.ks_woocommerce_group">
+                    <group name="template_data">
+                        <field name="ks_to_be_export" invisible="1"/>
+                        <field name="ks_woo_variant_count" invisible="1"/>
+                        <field name="ks_woo_instance_id" readonly="1"/>
+                    </group>
+                    <group name="woo_variant_details" attrs="{'invisible':[('ks_variant_exported_in_woo','=',False)]}">
+                        <group>
+                            <field name="ks_date_variant_created"/>
+                            <field name="ks_date_variant_updated"/>
+                        </group>
+                        <group>
+                            <field name="ks_variant_exported_in_woo"/>
+                            <field name="ks_woo_variant_id"/>
+                        </group>
+                    </group>
+                    <group name="woo_variant_price" attrs="{'invisible':[('ks_variant_exported_in_woo','=',False)]}">
+                        <group><field name="ks_woo_variant_reg_price" widget="monetary"/></group>
+                        <group><field name="ks_woo_variant_sale_price" widget="monetary"/></group>
+                    </group>
+                    <separator string="Description" attrs="{'invisible':[('ks_variant_exported_in_woo','=',False)]}"/>
+                    <group name="woo_variant_des" attrs="{'invisible':[('ks_variant_exported_in_woo','=',False)]}">
+                        <field name="ks_woo_variant_description" nolabel="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Inherited Easy Edit Form view for Product Variant-->
+    <record id="ks_product_product_easy_edit_woo_form_view" model="ir.ui.view">
+        <field name="name">ks.product.variant.woo.easy.edit.form.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[1]" position="before">
+                <group name="woo_info" string="WooCommerce info" attrs="{'invisible':[('ks_to_be_export','=',False)]}">
+                    <field name="ks_to_be_export" invisible="1"/>
+                    <field name="ks_woo_variant_count" invisible="1"/>
+                    <field name="ks_woo_instance_id" readonly="1"/>
+                    <group name="woo_variant_details" attrs="{'invisible':[('ks_variant_exported_in_woo','=',False)]}">
+                        <field name="ks_date_variant_created"/>
+                        <field name="ks_date_variant_updated"/>
+                        <field name="ks_variant_exported_in_woo"/>
+                        <field name="ks_woo_variant_id"/>
+                    </group>
+                    <group name="woo_variant_price" attrs="{'invisible':[('ks_to_be_export','=',False)]}">
+                        <field name="ks_woo_variant_reg_price" widget="monetary"/>
+                        <field name="ks_woo_variant_sale_price" widget="monetary"/>
+                    </group>
+                    <separator string="Woo Description" attrs="{'invisible':[('ks_variant_exported_in_woo','=',False)]}"/>
+                    <field name="ks_woo_variant_description" nolabel="1" attrs="{'invisible':[('ks_variant_exported_in_woo','=',False)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Search View for Product Variant-->
+    <record id="ks_product_product_search_view" model="ir.ui.view">
+        <field name="name">ks.product.product.search.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="ks_woo_variant_id" string="Woo Id" filter_domain="[('ks_woo_variant_id','ilike',self)]"/>
+                <separator/>
+                <filter string="Today Created Woo Product Variant" name="woo_created_today"
+                domain="[('ks_date_variant_created','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('ks_date_variant_created','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+                <filter string="Today Updated Woo Product Variant" name="woo_created_today"
+                domain="[('ks_date_variant_updated','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('ks_date_variant_updated','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Tree View for WooCommerce Product Variant-->
+    <record model="ir.ui.view" id="ks_woo_product_product_tree_view">
+            <field name="name">ks.woo.product.product.tree</field>
+            <field name="model">product.product</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="ks_woo_instance_id"/>
+                    <field name="ks_woo_variant_id"/>
+                    <field name="ks_woo_id" string="Woo Product Template Id"/>
+                    <field name="ks_exported_in_woo" />
+                </xpath>
+            </field>
+        </record>
+
+    <!--Window Action for Product Variant-->
+    <record model="ir.actions.act_window" id="action_woocommerce_product_product">
+        <field name="name">WooCommerce Product Variants</field>
+        <field name="res_model">product.product</field>
+        <field name="view_id" ref="ks_woocommerce.ks_woo_product_product_tree_view" />
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('ks_woo_variant_id','&gt;',0)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                **All the WooCommerce  Product Variants will appear here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_ks_woocomerce_product_product"
+              name="Product Variant"
+              parent="menu_ks_woocomerce_products"
+              action="action_woocommerce_product_product"
+              sequence="5"
+              groups="ks_woocommerce.ks_woocommerce_group"
+    />
+
+</odoo>

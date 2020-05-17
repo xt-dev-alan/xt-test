@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Server Action for Exporting/Updating Product Attributes from Odoo to WooCommerce-->
+    <record id="ks_export_woocommerce_product_attribute" model="ir.actions.server">
+        <field name="name">Export/Update Attributes</field>
+        <field name="model_id" ref="model_product_attribute"/>
+        <field name="binding_model_id" ref="model_product_attribute"/>
+        <field name="state">code</field>
+        <field name="code">
+            records.ks_update_product_attribute_to_woo()
+        </field>
+    </record>
+
+    <record id="ks_import_woocommerce_product_attribute" model="ir.actions.server">
+        <field name="name">Import Attributes</field>
+        <field name="model_id" ref="model_product_attribute"/>
+        <field name="binding_model_id" ref="model_product_attribute"/>
+        <field name="state">code</field>
+        <field name="code">
+            records.ks_update_product_attribute_to_odoo()
+        </field>
+    </record>
+
+    <!--Form View for WooCommerce Product Attributes-->
+    <record id="ks_form_woocommerce_product_attribute" model="ir.ui.view">
+        <field name="name">ks.woocommerce.product.attribute.form</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="after">
+                <page name="woo_info" string="WooCommerce Information" groups="ks_woocommerce.ks_woocommerce_group">
+                    <group>
+                        <group>
+                            <field name="ks_woo_instance_id" options="{'no_create':True,'no_create_edit': True}" attrs="{'readonly':[('ks_export_in_wo','!=',False)]}"/>
+                        </group>
+                        <group>
+                            <field name="ks_slug"/>
+                            <field name="ks_woo_id"/>
+                            <field name="ks_export_in_wo" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//tree" position="inside">
+                <field name="ks_slug" groups="ks_woocommerce.ks_woocommerce_group"/>
+                <field name="ks_woo_id" groups="ks_woocommerce.ks_woocommerce_group"/>
+                <field name="ks_export_in_wo" readonly="1" groups="ks_woocommerce.ks_woocommerce_group"/>
+            </xpath>
+            <xpath expr="//form" position="inside">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Tree View for WooCommerce Product Attributes-->
+    <record id="ks_tree_woocommerce_product_attribute" model="ir.ui.view">
+        <field name="name">ks.woocommerce.product.attribute.tree</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.attribute_tree_view"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='create_variant']" position="after">
+                <field name="ks_woo_instance_id"/>
+                <field name="ks_woo_id" readonly="1"/>
+                <field name="ks_export_in_wo" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="ks_slug"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Search View for WooCommerce Product Attributes-->
+    <record id="ks_product_attribute_search_view" model="ir.ui.view">
+        <field name="name">ks.product.attribute.search</field>
+        <field name="model">product.attribute</field>
+        <field name="arch" type="xml">
+            <search string="Product">
+                <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                <field name="ks_slug" string="Woo Slug" filter_domain="[('ks_slug','ilike',self)]"/>
+                <field name="ks_woo_id" string="Woo Id" filter_domain="[('ks_woo_id','ilike',self)]"/>
+                <field name="ks_woo_instance_id" string="Woo Instance Id" filter_domain="[('ks_woo_instance_id','ilike',self)]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Woo Instance Id" name="ks_woo_instance_id" context="{'group_by':'ks_woo_instance_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--Window Action for WooCommerce Product Attributes-->
+    <record model="ir.actions.act_window" id="action_woocommerce_product_attribute">
+        <field name="name">WooCommerce Attributes</field>
+        <field name="res_model">product.attribute</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('ks_woo_id','&gt;',0)]</field>
+        <field name="context">{'tree_view_ref': 'ks_woocommerce.ks_tree_woocommerce_product_attribute'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                **All the WooCommerce Attributes will appear here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_ks_woocomerce_product_attribute"
+              name="Attributes"
+              parent="menu_ks_woocomerce_products"
+              action="action_woocommerce_product_attribute"
+              sequence="2"
+              groups="ks_woocommerce.ks_woocommerce_group"
+    />
+
+</odoo>

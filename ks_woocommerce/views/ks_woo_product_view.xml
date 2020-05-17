@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Form View for WooCommerce Product Gallery Image -->
+    <record model="ir.ui.view" id="view_ks_woo_product_image_form">
+        <field name="name">ks.woo.product.image.form</field>
+        <field name="model">ks.woo.product.image</field>
+        <field name="arch" type="xml">
+            <form string="Woo Product Images">
+                <div class="row o_website_sale_image_modal">
+                    <div class="col-md-6 col-xl-7 text-center o_website_sale_image_modal_container">
+                        <field widget="image" attrs="{'readonly':[('id','>', 0)]}" type="base64" height="300" filename="ks_file_name" name="ks_image"/>
+                    </div>
+                    <div class="col-md-6 col-xl-5">
+                        <div class="oe_title">
+                            <label class="small" for="name" string="Image Name"/>
+                            <h2>
+                                <field name="ks_file_name" required="True"/>
+                            </h2>
+                            <field name="ks_exported_in_woo"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--Tree View for WooCommerce Product Gallery Image-->
+    <record model="ir.ui.view" id="view_ks_woo_product_image_tree">
+        <field name="name">ks.woo.product.image.tree</field>
+        <field name="model">ks.woo.product.image</field>
+        <field name="arch" type="xml">
+            <tree string="Woo Product Images">
+                <field name="ks_file_name"/>
+                <field name="ks_image" widget="image" height="50"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Inherited Form View for WooCommerce Product Template-->
+    <record id="ks_woo_product_template_form_view" model="ir.ui.view">
+        <field name="name">ks.woo.product.template.inherit.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(product.product_variant_action)d']" position="attributes">
+                <attribute name="invisible">False</attribute>
+                <attribute name="attrs">{'invisible': [('ks_woo_variant_count', '=', 0), ('product_variant_count', '&lt;=', 1)]}</attribute>
+            </xpath>
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="ks_to_be_export" attrs="{'readonly': [('ks_exported_in_woo', '=', True)]}"/>
+                    <label for="ks_to_be_export"/>
+                    <field name="ks_woo_variant_count" invisible="1"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='default_code']" position="replace">
+                <field name="default_code" string="Internal Reference/SKU" attrs="{'invisible': [('product_variant_count', '&gt;', 1)]}"/>
+            </xpath>
+            <xpath expr="//page[@name='sales']" position="after">
+                <page name="ks_woo_info" string="WooCommerce Info" attrs="{'invisible':['|',('is_product_variant','!=',False), ('ks_to_be_export','=',False)]}"
+                      groups="ks_woocommerce.ks_woocommerce_group">
+                    <group name="ks_woo_instance_group">
+                        <group>
+                            <field name="ks_woo_instance_id" options="{'no_create':True,'no_create_edit': True}" attrs="{'readonly':[('ks_exported_in_woo','!=',False)]}"/>
+                            <field name="ks_woo_product_type" force_save="1"/>
+                        </group>
+                        <group>
+                            <div>
+                                <field name="ks_woo_status" invisible="1"/>
+                                <button name="ks_update_product_status_in_woo" type="object" class="btn btn-primary oe_right"
+                                attrs="{'invisible':['|', ('ks_exported_in_woo','=',False), ('ks_woo_status', '=', True)]}" string=" Click to Publish"
+                                groups="ks_woocommerce.ks_woocommerce_group" context="{'publish':True}"
+                                icon="fa-desktop"/>
+
+                                <button name="ks_update_product_status_in_woo" type="object" class="btn btn-primary oe_right"
+                                attrs="{'invisible':['|', ('ks_exported_in_woo','=',False), ('ks_woo_status', '=', False)]}" string=" Click to UnPublish"
+                                groups="ks_woocommerce.ks_woocommerce_group" icon="fa-desktop" context="{'publish':False}" />
+                            </div>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible':[('ks_exported_in_woo','=',False)]}">
+                        <group>
+                            <field name="ks_date_created"/>
+                            <field name="ks_date_updated"/>
+                        </group>
+                        <group>
+                            <field name="ks_exported_in_woo"/>
+                            <field name="ks_woo_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="ks_woo_categories" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="ks_woo_tag" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': ['|', ('ks_woo_variant_count', '&gt;', 0), ('ks_woo_product_type', '=', 'grouped')]}">
+                        <group><field name="ks_woo_regular_price" widget="monetary"/></group>
+                        <group><field name="ks_woo_sale_price" widget="monetary"/></group>
+                    </group>
+                    <group string="Description">
+                        <field name="ks_woo_description" nolabel="1" placeholder="This note will show up on product description"/>
+                    </group>
+                    <group string=" Short Description">
+                        <field name="ks_woo_short_description" nolabel="1" placeholder="This note will show up on product short description"/>
+                    </group>
+                </page>
+                <page string="WooCommerce Gallery" attrs="{'invisible':['|',('is_product_variant','!=',False),('ks_to_be_export','=',False)]}"
+                      groups="ks_woocommerce.ks_woocommerce_group">
+                    <group name="extra_images" string="Gallery Images">
+                        <field name="ks_product_image_ids" domain="[('ks_woo_instance_id','=',ks_woo_instance_id)]" context="{'default_name': name, 'default_id': active_id}" nolabel="1">
+                            <tree>
+                                <field name="sequence" widget="handle"/>
+                                <field name="ks_woo_id"/>
+                                <field name="ks_file_name"/>
+                                <field name="ks_image" widget="image" height="50"/>
+                                <field name="ks_exported_in_woo"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='action_view_stock_move_lines']" position="before">
+                <button type="object" name="ks_average_woo_product_rating"
+                        attrs="{'invisible':[('ks_exported_in_woo','=',False)]}"
+                        class="oe_stat_button" groups="ks_woocommerce.ks_woocommerce_group" icon="fa-star">
+                    <div class="o_field_widget o_stat_info ">
+                        <span class="o_stat_value" widget="statinfo">
+                            <field name="ks_average_rating" widget="statinfo" nolabel="1" class="mr4"/>
+                        </span>
+                        <span class="o_stat_text">Average Rating</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//page[@name='variants']/field[@name='attribute_line_ids']" position="replace">
+                <field name="attribute_line_ids" widget="one2many_list" context="{'show_attribute': False}">
+                    <tree string="Variants" editable="bottom">
+                        <field name="attribute_id" domain="[('ks_woo_id', '!=', -1)]"/>
+                        <field name="value_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('attribute_id', '=', attribute_id)]" context="{'default_attribute_id': attribute_id}"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Tree View for WooCommerce Product Template-->
+    <record model="ir.ui.view" id="ks_woo_product_template_tree_view">
+        <field name="name">ks.woo.product.template.tree</field>
+        <field name="model">product.template</field>
+        <field name="mode">primary</field>
+        <field name="priority">24</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='virtual_available']" position="after">
+                <field name="ks_woo_instance_id"/>
+                <field name="ks_woo_id"/>
+                <field name="ks_exported_in_woo" />
+            </xpath>
+        </field>
+    </record>
+
+    <!--Search View for WooCommerce Product Template-->
+    <record id="ks_product_template_search_view" model="ir.ui.view">
+        <field name="name">ks.product.template.search.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="before">
+                <field name="ks_woo_id" string="Woo Id" filter_domain="[('ks_woo_id','ilike',self)]"/>
+                <field name="ks_woo_instance_id" string="Woo Instance Id" filter_domain="[('ks_woo_instance_id','ilike',self)]"/>
+                <separator/>
+                <filter string="Today Created Woo Product" name="woo_created_today"
+                domain="[('ks_date_created','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('ks_date_created','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+                <filter string="Today Updated Woo Product" name="woo_created_today"
+                domain="[('ks_date_updated','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('ks_date_updated','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Woo Instance Id" name="ks_woo_instance_id" context="{'group_by':'ks_woo_instance_id'}"/>
+                    <filter string="Woo Product Type" name="ks_woo_product_type" context="{'group_by':'ks_woo_product_type'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Server Action Exporting/Updating Product details from Odoo to WooCommerce-->
+    <record id="ks_export_woocommerce_products" model="ir.actions.server">
+        <field name="name">Export/Update Product</field>
+        <field name="model_id" ref="model_product_template"/>
+        <field name="binding_model_id" ref="model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">
+            records.ks_update_product_to_woo()
+        </field>
+    </record>
+
+    <record id="ks_import_woocommerce_products" model="ir.actions.server">
+        <field name="name">Import Product</field>
+        <field name="model_id" ref="model_product_template"/>
+        <field name="binding_model_id" ref="model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">
+            records.ks_update_product_to_odoo()
+        </field>
+    </record>
+
+
+    <!--Window Action for WooCommerce Product Template-->
+    <record model="ir.actions.act_window" id="action_woocommerce_product_templates">
+        <field name="name">WooCommerce Products</field>
+        <field name="res_model">product.template</field>
+	<field name="view_id" ref="ks_woocommerce.ks_woo_product_template_tree_view" />
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">['|', ('ks_woo_id','&gt;',0), ('ks_to_be_export','!=',False) ]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click here to create a new WooCommerce Product.
+            </p>
+            <p>
+                All the WooCommerce Products those are already synced or created to export will appear here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_ks_woocomerce_product_templates"
+              name="Product"
+              parent="menu_ks_woocomerce_products"
+              action="action_woocommerce_product_templates"
+              sequence="4"
+              groups="ks_woocommerce.ks_woocommerce_group"
+    />
+</odoo>
