@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle 
+ -->
+<odoo>
+    <template id="report_print_cheque_template">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <style>
+                    .rotate {
+                    -webkit-transform: rotate(-45deg);
+                    -moz-transform: rotate(-45deg);
+                    -ms-transform: rotate(-45deg);
+                    -o-transform: rotate(-45deg);
+                    border-top:1px solid black;
+                    border-bottom:1px solid black;
+                    }
+                </style>
+
+                <div class="row"
+                     t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;color:#{o.cheque_formate_id.color};};">
+                    <t t-if="o.cheque_formate_id.is_date">
+                        <t t-set="date" t-value="get_date(o.payment_date, o.cheque_formate_id)"/>
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.date_left}px;margin-top:#{o.cheque_formate_id.date_m_top}px;position: absolute;};">
+                            <span t-esc="date"/>
+                        </div>
+                    </t>
+
+                    <!-- Print Partner Name in Cheque -->
+                    <t t-if="o.cheque_formate_id.is_partner">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.partner_m_left}px;margin-top:#{o.cheque_formate_id.partner_m_top}px;position: absolute;};"
+                             class="col-8">
+                            <t t-if="o.cheque_formate_id.is_partner_bold">
+                                <div class="ckus_payee_addr"
+                                     t-esc="get_partner_name(o,o.cheque_formate_id.partner_text)"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            </t>
+                            <t t-if="not o.cheque_formate_id.is_partner_bold">
+                                <div class="ckus_payee_addr"
+                                     t-esc="get_partner_name(o,o.cheque_formate_id.partner_text)"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            </t>
+
+                        </div>
+                    </t>
+
+                    <t t-if="o.cheque_formate_id.is_acc_pay">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.acc_pay_m_left}px;margin-top:#{o.cheque_formate_id.acc_pay_m_top}px;position: absolute;};">
+                            <div class='rotate text-center' style="width:60px;font-size:12px">
+                                A/C PAY
+                            </div>
+                        </div>
+                    </t>
+
+                    <!-- Print Amount in Digit In Cheque -->
+                    <t t-if="o.cheque_formate_id.is_amount">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.amt_m_left}px;margin-top:#{o.cheque_formate_id.amt_m_top}px;position: absolute;};">
+                            <t t-if="o.cheque_formate_id.is_star">
+                                ***
+                            </t>
+                            <t t-if="o.cheque_formate_id.is_currency">
+                                <span t-field="o.amount"
+                                      t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </t>
+                            <t t-if="not o.cheque_formate_id.is_currency">
+                                <span t-esc="'%.2f'%(o.amount)"/>
+                            </t>
+
+                            <t t-if="o.cheque_formate_id.is_star">
+                                ***
+                            </t>
+
+                        </div>
+                    </t>
+
+
+                    <!-- Print Amount in Word In Cheque -->
+                    <t t-if="o.cheque_formate_id.is_amount_word">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.amt_w_m_left}px;margin-top:#{o.cheque_formate_id.amt_w_m_top}px;position: absolute;};"
+                             class="col-8">
+                            <t t-if="o.cheque_formate_id.is_word_bold">
+                                <span style="font-weight:bold" t-esc="amount_word(o)[0]"/>
+                            </t>
+                            <t t-if="not o.cheque_formate_id.is_word_bold">
+                                <span t-esc="amount_word(o)[0]"/>
+                            </t>
+                        </div>
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.amt_w_s_m_left}px;margin-top:#{o.cheque_formate_id.amt_w_s_m_top}px;position: absolute;};"
+                             class="col-8">
+                            <t t-if="o.cheque_formate_id.is_word_bold">
+                                <span style="font-weight:bold" t-esc="amount_word(o)[1]"/>
+                            </t>
+                            <t t-if="not o.cheque_formate_id.is_word_bold">
+                                <span t-esc="amount_word(o)[1]"/>
+                            </t>
+                        </div>
+                    </t>
+
+
+                    <t t-if="o.cheque_formate_id.is_company">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.c_margin_left}px;margin-top:#{o.cheque_formate_id.c_margin_top}px;position: absolute;};">
+                            <span t-esc="o.company_id.name"/>
+                        </div>
+                    </t>
+
+                    <t t-if="o.cheque_formate_id.is_cheque_no and o.cheque_no">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.cheque_margin_left}px;margin-top:#{o.cheque_formate_id.cheque_margin_top}px;position: absolute;};">
+                            Cheque No.
+                            <span t-esc="o.cheque_no"/>
+                        </div>
+                    </t>
+
+
+                    <t t-if="o.cheque_formate_id.is_free_one and o.text_free">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.f_one_margin_left}px;margin-top:#{o.cheque_formate_id.f_one_margin_top}px;position: absolute;};">
+                            <span t-esc="o.text_free"/>
+                        </div>
+                    </t>
+
+
+                    <t t-if="o.cheque_formate_id.is_free_two and o.text_free">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.f_two_margin_left}px;margin-top:#{o.cheque_formate_id.f_two_margin_top}px;position: absolute;};">
+                            <span t-esc="o.text_free"/>
+                        </div>
+                    </t>
+
+                    <t t-if="o.cheque_formate_id.is_stub">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.stub_margin_left}px;margin-top:#{o.cheque_formate_id.stub_margin_top}px;position: absolute;"
+                             class="col-12">
+                            <table class="table table-condensed" style="width:90%">
+                                <t t-if="o.cheque_no">
+                                    <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                        <td colspan="4" class="text-right" style="border:1px solid #FFF">
+                                            Cheque No.
+                                            <span t-field="o.cheque_no"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <td colspan="6" class="text-right" style="border:1px solid #FFF">
+                                        <span t-esc="get_date(o.payment_date, o.cheque_formate_id)"/>
+
+
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <th style="border-bottom:1px solid #000">Date</th>
+                                    <th style="border-bottom:1px solid #000">Reference</th>
+                                    <th style="border-bottom:1px solid #000">Invoice amount</th>
+                                    <th style="border-bottom:1px solid #000">Open amount</th>
+                                    <th style="border-bottom:1px solid #000">Discount on bill</th>
+                                    <th style="border-bottom:1px solid #000" class="text-right">Payment</th>
+                                </tr>
+                                <tbody t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <t t-foreach="o.invoice_ids" t-as="line">
+                                        <tr id="tr_head">
+                                            <td>
+                                                <span t-field="line.date_invoice"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.move_name"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.amount_total"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.residual"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.discount"/>
+                                            </td>
+                                            <td align="right">
+                                                <span t-field="line.amount_total"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr id="tr_head">
+                                        <td align="right" colspan="5">
+                                            <strong>Total Check Amount</strong>
+                                        </td>
+                                        <td align="right">
+                                            <span t-field="o.amount"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+
+                    <!-- Print Partner Name 2 in Cheque -->
+                    <t t-if="o.cheque_formate_id.is_partner2">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.partner_m_left2}px;margin-top:#{o.cheque_formate_id.partner_m_top2}px;position: absolute;};"
+                             class="col-8">
+                            <t t-if="o.cheque_formate_id.is_partner_bold2">
+                                <div class="ckus_payee_addr"
+                                     t-esc="get_partner_name(o,o.cheque_formate_id.partner_text)"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            </t>
+                            <t t-if="not o.cheque_formate_id.is_partner_bold2">
+                                <div class="ckus_payee_addr"
+                                     t-esc="get_partner_name(o,o.cheque_formate_id.partner_text)"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            </t>
+                        </div>
+                    </t>
+
+
+                    <t t-if="o.cheque_formate_id.is_stub2">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.stub_margin_left2}px;margin-top:#{o.cheque_formate_id.stub_margin_top2}px;position: absolute;"
+                             class="col-12">
+                            <table class="table table-condensed" style="width:90%">
+                                <t t-if="o.cheque_no">
+                                    <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                        <td colspan="4" class="text-right" style="border:1px solid #FFF">
+                                            Cheque No.
+                                            <span t-field="o.cheque_no"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <td colspan="6" class="text-right" style="border:1px solid #FFF">
+                                        <span t-esc="get_date(o.payment_date, o.cheque_formate_id)"/>
+
+
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <th style="border-bottom:1px solid #000">Date</th>
+                                    <th style="border-bottom:1px solid #000">Reference</th>
+                                    <th style="border-bottom:1px solid #000">Invoice amount</th>
+                                    <th style="border-bottom:1px solid #000">Open amount</th>
+                                    <th style="border-bottom:1px solid #000">Discount on bill</th>
+                                    <th style="border-bottom:1px solid #000" class="text-right">Payment</th>
+                                </tr>
+                                <tbody t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <t t-foreach="o.invoice_ids" t-as="line">
+                                        <tr id="tr_head">
+                                            <td>
+                                                <span t-field="line.date_invoice"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.move_name"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.amount_total"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.residual"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.discount"/>
+                                            </td>
+                                            <td align="right">
+                                                <span t-field="line.amount_total"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr id="tr_head">
+                                        <td align="right" colspan="5">
+                                            <strong>Total Check Amount</strong>
+                                        </td>
+                                        <td align="right">
+                                            <span t-field="o.amount"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+
+                    <!-- Print Partner Name 3 in Cheque -->
+                    <t t-if="o.cheque_formate_id.is_partner3">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.partner_m_left3}px;margin-top:#{o.cheque_formate_id.partner_m_top3}px;position: absolute;};"
+                             class="col-8">
+                            <t t-if="o.cheque_formate_id.is_partner_bold3">
+                                <div class="ckus_payee_addr"
+                                     t-esc="get_partner_name(o,o.cheque_formate_id.partner_text)"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            </t>
+                            <t t-if="not o.cheque_formate_id.is_partner_bold3">
+                                <div class="ckus_payee_addr"
+                                     t-esc="get_partner_name(o,o.cheque_formate_id.partner_text)"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            </t>
+                        </div>
+                    </t>
+
+                    <t t-if="o.cheque_formate_id.is_stub3">
+                        <div t-attf-style="margin-left:#{o.cheque_formate_id.stub_margin_left3}px;margin-top:#{o.cheque_formate_id.stub_margin_top3}px;position: absolute;"
+                             class="col-12">
+                            <table class="table table-condensed" style="width:90%">
+                                <t t-if="o.cheque_no">
+                                    <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                        <td colspan="4" class="text-right" style="border:1px solid #FFF">
+                                            Cheque No.
+                                            <span t-field="o.cheque_no"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <td colspan="6" class="text-right" style="border:1px solid #FFF">
+                                        <span t-esc="get_date(o.payment_date, o.cheque_formate_id)"/>
+
+
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <th style="border-bottom:1px solid #000">Date</th>
+                                    <th style="border-bottom:1px solid #000">Reference</th>
+                                    <th style="border-bottom:1px solid #000">Invoice amount</th>
+                                    <th style="border-bottom:1px solid #000">Open amount</th>
+                                    <th style="border-bottom:1px solid #000">Discount on bill</th>
+                                    <th style="border-bottom:1px solid #000" class="text-right">Payment</th>
+                                </tr>
+                                <tbody t-attf-style="font-size:#{o.cheque_formate_id.font_size}px;">
+                                    <t t-foreach="o.invoice_ids" t-as="line">
+                                        <tr id="tr_head">
+                                            <td>
+                                                <span t-field="line.date_invoice"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.move_name"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.amount_total"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.residual"/>
+                                            </td>
+                                            <td align="center">
+                                                <span t-field="line.discount"/>
+                                            </td>
+                                            <td align="right">
+                                                <span t-field="line.amount_total"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr id="tr_head">
+                                        <td align="right" colspan="5">
+                                            <strong>Total Check Amount</strong>
+                                        </td>
+                                        <td align="right">
+                                            <span t-field="o.amount"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+
+                </div>
+            </div>
+        </t>
+
+    </template>
+
+    <template id="report_print_cheque">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="dev_print_cheque.report_print_cheque_template"/>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>
