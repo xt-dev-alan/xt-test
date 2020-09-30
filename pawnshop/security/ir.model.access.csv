@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pawn_pawn,access.pawn.pawn,model_pawn_pawn,,1,1,1,1
+access_pawn_product_search,access.pawn.product.search,model_pawn_product_search,,1,1,1,1

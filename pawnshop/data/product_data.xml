@@ -1,0 +1,20 @@
+<odoo>
+    <data noupdate="1">
+        <record id="product_costo_administracion" model="product.product">
+            <field name="name">Costo Administración</field>
+        </record>
+        
+        <record id="product_costo_almacenamiento" model="product.product">
+            <field name="name">Costo Almacenamiento</field>
+        </record>
+        
+        <record id="product_interes_prestamo" model="product.product">
+            <field name="name">Interes del Prestamo</field>
+        </record>
+
+        <record id="categ_empeño" model="product.category">
+            <field name="name">Empeño</field>
+        </record>
+
+    </data>
+</odoo>

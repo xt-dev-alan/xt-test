@@ -175,7 +175,7 @@ Odoo Manage Dynamic Print Check
         'views/report_print_cheque.xml',
         'views/report_menu.xml',
         'views/cheque_setting_view.xml',
-    
+        'views/account_vocher_view.xml',
     ],
     'demo': [],
     'test': [],

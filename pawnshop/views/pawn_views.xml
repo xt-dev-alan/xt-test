@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="pawn_pawn_view_tree" model="ir.ui.view">
+            <field name="name">pawn.pawn.view.tree</field>
+            <field name="model">pawn.pawn</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="date" />
+                    <field name="user_id" />
+                    <field name="amount" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="pawn_pawn_view_form" model="ir.ui.view">
+            <field name="name">pawn.pawn.view.form</field>
+            <field name="model">pawn.pawn</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button string="Accept" name="action_accept" type="object" class="oe_highlight" states="draft"/>
+                        <button string="Create Orden" name="create_order" type="object" class="oe_highlight" states="accept"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group col="4">
+                            <field name="date" />
+                            <field name="user_id" />
+                            <field name="amount" />
+                            <field name="type" />
+                            <field name="order_id" />
+                            <field name="approved_date" states="accept"/>
+                        </group>
+                        <group col="4" name="Partner" string="Partner">
+                            <field name="partner_name" states="draft"/>
+                            <field name="partner_vat" states="draft"/>
+                            <field name="partner_id" states="accept,progress,close"/>
+                            <field name="street" states="accept,progress,close"/>
+                            <field name="city" states="accept,progress,close"/>
+                            <field name="phone" states="accept,progress,close"/>
+                        </group>
+                        <group col="4" name="Product" string="Product">
+                            <field name="product_name" />
+                            <field name="product_description" />
+                            <field name="product_id" />
+                        </group>
+                        <field name="product_search_ids" mode="tree" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="name" string="URL or Description"/>
+                                <field name="attachment" />
+                                <field name="currency_id" invisible="1"/>
+                                <field name="amount" />
+                                <field name="pawn_id" invisible="1"/>
+                            </tree>
+                        </field>
+        
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+
+                </form>
+            </field>
+        </record>
+
+    <record id="pawn_pawn_action" model="ir.actions.act_window">
+        <field name="name">Pawn</field>
+        <field name="res_model">pawn.pawn</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="pawn_pawn_view_tree"/>
+        <field name="domain">[('type', '=', 'pawn')]</field>
+        <field name="context">{'default_type': 'pawn'}</field>
+    </record>
+
+    <record id="pawn_sale_action" model="ir.actions.act_window">
+        <field name="name">Sales</field>
+        <field name="res_model">pawn.pawn</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="pawn_pawn_view_tree"/>
+        <field name="domain">[('type', '=', 'sale')]</field>
+        <field name="context">{'default_type': 'sale'}</field>
+    </record>
+
+    <menuitem
+        id="pawn_root_menu"
+        name="Pawn"
+        web_icon="pawnshop,static/description/pawn-shop.png"
+        sequence="10"/>
+
+    <menuitem
+        id="pawn_pawn_submenu"
+        name="Pawns"
+        action="pawn_pawn_action"
+        parent="pawn_root_menu"
+        sequence="10"/>
+
+    <menuitem
+        id="pawn_sale_submenu"
+        name="Sales"
+        action="pawn_sale_action"
+        parent="pawn_root_menu"
+        sequence="10"/>
+
+    </data>
+
+</odoo>
