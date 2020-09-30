@@ -48,7 +48,10 @@ class PawnPawn(models.Model):
         partner = self.env['res.partner']
         partner_id = partner.search( [('vat', '=', self.partner_vat)], limit=1)
         if not partner_id:
-            partner_id = partner.create(  {'name': self.partner_name, 'vat': self.partner_vat} )
+            partner_id = partner.create(  {
+                                            'name': self.partner_name, 
+                                            'vat': self.partner_vat,
+                                            'type': 'contact'} )
         return partner_id
 
     def _create_product(self):
